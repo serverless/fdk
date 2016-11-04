@@ -1,6 +1,8 @@
 'use strict';
 
-class SDK {
-}
+const AWS = require('aws-sdk');
+const Stdlib = require('./stdlib');
 
-module.exports = () => new SDK();
+module.exports = () => new Stdlib(new AWS.Lambda({
+  apiVersion: '2015-03-31',
+}));
