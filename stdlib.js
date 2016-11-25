@@ -5,9 +5,24 @@ class Stdlib {
     this.lambda = lambda;
   }
 
-  call(name, argument, callback) {
-    const arn = process.env[`SERVERLESS_FUNC_${name}_ARN`];
+  call(name, argument, options, cb) {
+    let callback;
+    let invokeRequest;
 
+    if (typeof options === 'function') {
+      callback = options;
+    } else {
+      callback = cb;
+    }
+
+    if (options && typeof options.timeout === 'number') {
+      setTimeout(() => {
+        invokeRequest.abort();
+        callback(new Error('Calling function failed: Timeout exceeded'));
+      }, options.timeout);
+    }
+
+    const arn = process.env[`SERVERLESS_FUNC_${name}_ARN`];
     if (!arn) {
       callback(new Error('Function ARN not found'));
     } else {
@@ -16,7 +31,8 @@ class Stdlib {
         InvocationType: 'RequestResponse',
         Payload: JSON.stringify(argument),
       };
-      this.lambda.invoke(params, (err, response) => {
+
+      invokeRequest = this.lambda.invoke(params, (err, response) => {
         if (err) {
           callback(new Error(`Calling function failed: ${err.message}`));
         } else {

@@ -1,4 +1,5 @@
 /* eslint import/no-extraneous-dependencies: ["off"] */
+/* eslint no-unused-expressions: 0 */
 'use strict';
 
 const chai = require('chai');
@@ -27,101 +28,123 @@ describe('stdlib', () => {
     sinon.restore();
   });
 
-  it('should callback error if function name not resolved', () => {
-    process.env.SERVERLESS_FUNC_test_ARN = null;
-    stdlib.call('', null, callback);
+  describe('#call', () => {
+    it('should callback error if function name not resolved', () => {
+      process.env.SERVERLESS_FUNC_test_ARN = null;
+      stdlib.call('', null, callback);
 
-    expect(callback).to.have.been.calledWithExactly(
-      sinon.match
-        .instanceOf(Error)
-        .and(sinon.match.has('message', 'Function ARN not found'))
-    );
-  });
-
-  it('should callback parsed invocation result', () => {
-    sinon.stub(lambda, 'invoke').yields(null, {
-      StatusCode: 200,
-      Payload: '{"testKey": "testValue"}',
+      expect(callback).to.have.been.calledWithExactly(
+        sinon.match
+          .instanceOf(Error)
+          .and(sinon.match.has('message', 'Function ARN not found'))
+      );
     });
 
-    stdlib.call('test', null, callback);
+    it('should callback parsed invocation result', () => {
+      sinon.stub(lambda, 'invoke').yields(null, {
+        StatusCode: 200,
+        Payload: '{"testKey": "testValue"}',
+      });
 
-    expect(callback).to.have.been.calledWithExactly(null, {
-      testKey: 'testValue',
-    });
-  });
+      stdlib.call('test', null, callback);
 
-  it('should callback error if response not parsable', () => {
-    sinon.stub(lambda, 'invoke').yields(null, {
-      StatusCode: 200,
-      Payload: '{"testKey": "testValue"',
-    });
-    sinon.stub(JSON, 'parse').throws(new Error('end of JSON input'));
-
-    stdlib.call('test', null, callback);
-
-    expect(callback).to.have.been.calledWithExactly(
-      sinon.match
-        .instanceOf(Error)
-        .and(sinon.match.has(
-          'message', 'Parsing response failed: end of JSON input'
-        ))
-    );
-  });
-
-  it('should callback error if response is error', () => {
-    sinon.stub(lambda, 'invoke').yields(null, {
-      StatusCode: 200,
-      FunctionError: 'Unhandled',
-      Payload: '{"errorMessage": "Process exited before completing request"}',
+      expect(callback).to.have.been.calledWithExactly(null, {
+        testKey: 'testValue',
+      });
     });
 
-    stdlib.call('test', null, callback);
+    it('should callback error if response not parsable', () => {
+      sinon.stub(lambda, 'invoke').yields(null, {
+        StatusCode: 200,
+        Payload: '{"testKey": "testValue"',
+      });
+      sinon.stub(JSON, 'parse').throws(new Error('end of JSON input'));
 
-    expect(callback).to.have.been.calledWithExactly(
-      sinon.match
-        .instanceOf(Error)
-        .and(sinon.match.has(
-          'message', 'Calling function failed: Process exited before completing request'
-        ))
-    );
-  });
+      stdlib.call('test', null, callback);
 
-  it('should callback error if error occured', () => {
-    sinon.stub(lambda, 'invoke').yields(new Error('Function not found'));
-
-    stdlib.call('test', null, callback);
-
-    expect(callback).to.have.been.calledWithExactly(
-      sinon.match
-        .instanceOf(Error)
-        .and(sinon.match.has('message', 'Calling function failed: Function not found'))
-    );
-  });
-
-  it('should invoke req/res function', () => {
-    sinon.stub(lambda, 'invoke').yields(null, {});
-
-    stdlib.call('test', null, callback);
-
-    expect(lambda.invoke).to.have.been.calledWith({
-      FunctionName: 'arn',
-      InvocationType: 'RequestResponse',
-      Payload: 'null',
+      expect(callback).to.have.been.calledWithExactly(
+        sinon.match
+          .instanceOf(Error)
+          .and(sinon.match.has(
+            'message', 'Parsing response failed: end of JSON input'
+          ))
+      );
     });
-  });
 
-  it('should invoke function with provided argument as JSON string', () => {
-    sinon.stub(lambda, 'invoke').yields(null, {});
+    it('should callback error if response is error', () => {
+      sinon.stub(lambda, 'invoke').yields(null, {
+        StatusCode: 200,
+        FunctionError: 'Unhandled',
+        Payload: '{"errorMessage": "Process exited before completing request"}',
+      });
 
-    stdlib.call('test', {
-      key: 'value',
-    }, callback);
+      stdlib.call('test', null, callback);
 
-    expect(lambda.invoke).to.have.been.calledWith({
-      FunctionName: 'arn',
-      InvocationType: 'RequestResponse',
-      Payload: '{"key":"value"}',
+      expect(callback).to.have.been.calledWithExactly(
+        sinon.match
+          .instanceOf(Error)
+          .and(sinon.match.has(
+            'message', 'Calling function failed: Process exited before completing request'
+          ))
+      );
+    });
+
+    it('should callback error if error occured', () => {
+      sinon.stub(lambda, 'invoke').yields(new Error('Function not found'));
+
+      stdlib.call('test', null, callback);
+
+      expect(callback).to.have.been.calledWithExactly(
+        sinon.match
+          .instanceOf(Error)
+          .and(sinon.match.has('message', 'Calling function failed: Function not found'))
+      );
+    });
+
+    it('should invoke req/res function', () => {
+      sinon.stub(lambda, 'invoke').yields(null, {});
+
+      stdlib.call('test', null, callback);
+
+      expect(lambda.invoke).to.have.been.calledWith({
+        FunctionName: 'arn',
+        InvocationType: 'RequestResponse',
+        Payload: 'null',
+      });
+    });
+
+    it('should invoke function with provided argument as JSON string', () => {
+      sinon.stub(lambda, 'invoke').yields(null, {});
+
+      stdlib.call('test', {
+        key: 'value',
+      }, callback);
+
+      expect(lambda.invoke).to.have.been.calledWith({
+        FunctionName: 'arn',
+        InvocationType: 'RequestResponse',
+        Payload: '{"key":"value"}',
+      });
+    });
+
+    it('should callback error if invocation takes longer than defined timeout', () => {
+      const abort = sinon.spy();
+      sinon.stub(lambda, 'invoke').returns({
+        abort,
+      });
+      const clock = sinon.useFakeTimers();
+
+      stdlib.call('test', null, {
+        timeout: 1000,
+      }, callback);
+      clock.tick(1000);
+
+      expect(callback).to.have.been.calledWithExactly(
+        sinon.match
+          .instanceOf(Error)
+          .and(sinon.match.has('message', 'Calling function failed: Timeout exceeded'))
+      );
+      expect(abort).to.have.been.calledOnce;
     });
   });
 });
