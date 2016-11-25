@@ -8,14 +8,13 @@ Goals of Serverless Standard Library is providing:
 
 ## API
 
-### `call(name, argument, [options], callback)`
+### `call(name, [argument], [options])` -> `Promise`
 
 Call function.
 
 Options:
 
 - name - `string` - function name,
-- argument - any type - argument to pass to called function,
+- argument (optional) - any type - argument to pass to called function,
 - options (optional) - `object`:
-  - timeout - `number` - function call timeout in milliseconds. If function call exceeds timeout error is called back,
-- callback - `function(error, result)`.
+  - timeout - `number` - function call timeout in milliseconds. If function call exceeds timeout error is called back.
