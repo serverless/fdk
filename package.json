@@ -1,8 +1,8 @@
 {
-  "name": "@serverless/sdk",
+  "name": "@serverless/stdlib",
   "version": "0.1.0",
   "license": "MIT",
-  "repository": "https://github.com/serverless/sdk-nodejs",
+  "repository": "https://github.com/serverless/stdlib-nodejs",
   "scripts": {
     "lint": "eslint .",
     "test": "mocha ./*.test.js"
