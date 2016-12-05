@@ -1,5 +1,6 @@
 /* eslint import/no-extraneous-dependencies: ["off"] */
 /* eslint no-unused-expressions: 0 */
+/* eslint func-names: 0 */
 'use strict';
 
 const chai = require('chai');
@@ -122,6 +123,20 @@ describe('stdlib', () => {
 
       expect(abort).to.have.been.calledOnce;
       return expect(result).be.rejectedWith(Error, 'Calling function failed: Timeout exceeded');
+    });
+  });
+
+  describe('#handler', () => {
+    it('should call provided function with event and callback', () => {
+      const fn = sinon.spy();
+
+      const event = {};
+      const context = {};
+      const callback = function () {};
+      const handler = stdlib.handler(fn);
+      handler(event, context, callback);
+
+      expect(fn).to.have.been.calledWithExactly(event, callback);
     });
   });
 });
