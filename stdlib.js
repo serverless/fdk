@@ -1,3 +1,5 @@
+/* eslint func-names: 0 */
+
 'use strict';
 
 class Stdlib {
@@ -46,6 +48,12 @@ class Stdlib {
         });
       }
     });
+  }
+
+  handler(fn) {
+    return function (e, ctx, cb) {
+      fn(e, cb);
+    };
   }
 }
 
