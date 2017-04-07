@@ -22,7 +22,7 @@ Generic function handler. `stdlib(fn)` returns `Handler` object that wraps `fn` 
 - handle returned value
 - handle returned Promise
 
-`Handler` object expose `handler()` function that returns AWS Lambda compatible handler.
+`Handler` object exposes `handler()` function that returns AWS Lambda compatible handler.
 
 Options:
 
