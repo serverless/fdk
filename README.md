@@ -1,5 +1,7 @@
 # Serverless Standard Library for Node.js
 
+[![Build Status](https://travis-ci.org/serverless/stdlib-nodejs.svg?branch=master)](https://travis-ci.org/serverless/stdlib-nodejs)
+
 Goals of Serverless Standard Library is providing:
 
 - methods for service/functions communication,

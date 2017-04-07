@@ -20,8 +20,6 @@ describe('stdlib', () => {
   let stdlib;
 
   beforeEach(() => {
-    process.env.SERVERLESS_FUNC_test_ARN = 'arn';
-
     lambda = new AWS.Lambda();
     stdlib = new Stdlib(lambda);
   });
@@ -31,12 +29,6 @@ describe('stdlib', () => {
   });
 
   describe('#call', () => {
-    it('should callback error if function name not resolved', () => {
-      process.env.SERVERLESS_FUNC_test_ARN = null;
-
-      return expect(stdlib.call('')).to.be.rejectedWith(Error, 'Function ARN not found');
-    });
-
     it('should callback parsed invocation result', () => {
       sinon.stub(lambda, 'invoke').yields(null, {
         StatusCode: 200,
@@ -70,7 +62,7 @@ describe('stdlib', () => {
         .rejectedWith(Error, 'Calling function failed: Process exited before completing request');
     });
 
-    it('should callback error if error occured', () => {
+    it.only('should callback error if error occured', () => {
       sinon.stub(lambda, 'invoke').yields(new Error('Function not found'));
 
       stdlib.call('test', null);
@@ -87,7 +79,7 @@ describe('stdlib', () => {
       stdlib.call('test', null);
 
       return expect(lambda.invoke).to.have.been.calledWith({
-        FunctionName: 'arn',
+        FunctionName: 'test',
         InvocationType: 'RequestResponse',
         Payload: 'null',
       });
@@ -103,7 +95,7 @@ describe('stdlib', () => {
       });
 
       return expect(lambda.invoke).to.have.been.calledWith({
-        FunctionName: 'arn',
+        FunctionName: 'test',
         InvocationType: 'RequestResponse',
         Payload: '{"key":"value"}',
       });

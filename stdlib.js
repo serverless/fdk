@@ -18,35 +18,30 @@ class Stdlib {
         }, options.timeout);
       }
 
-      const arn = process.env[`SERVERLESS_FUNC_${name}_ARN`];
-      if (!arn) {
-        reject(new Error('Function ARN not found'));
-      } else {
-        const params = {
-          FunctionName: arn,
-          InvocationType: 'RequestResponse',
-          Payload: JSON.stringify(argument),
-        };
+      const params = {
+        FunctionName: name,
+        InvocationType: 'RequestResponse',
+        Payload: JSON.stringify(argument),
+      };
 
-        invokeRequest = this.lambda.invoke(params, (err, response) => {
-          if (err) {
-            reject(new Error(`Calling function failed: ${err.message}`));
-          } else {
-            let payload;
-            try {
-              payload = JSON.parse(response.Payload);
+      invokeRequest = this.lambda.invoke(params, (err, response) => {
+        if (err) {
+          reject(new Error(`Calling function failed: ${err.message}`));
+        } else {
+          let payload;
+          try {
+            payload = JSON.parse(response.Payload);
 
-              if (response.FunctionError) {
-                reject(new Error(`Calling function failed: ${payload.errorMessage}`));
-              } else {
-                resolve(payload);
-              }
-            } catch (ex) {
-              reject(new Error(`Parsing response failed: ${ex.message}`));
+            if (response.FunctionError) {
+              reject(new Error(`Calling function failed: ${payload.errorMessage}`));
+            } else {
+              resolve(payload);
             }
+          } catch (ex) {
+            reject(new Error(`Parsing response failed: ${ex.message}`));
           }
-        });
-      }
+        }
+      });
     });
   }
 
