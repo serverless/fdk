@@ -16,9 +16,28 @@
     "eslint": "^3.3.1",
     "eslint-config-airbnb-base": "^5.0.3",
     "eslint-plugin-import": "^1.8.1",
+    "eslint-plugin-node": "^4.0.1",
     "mocha": "^3.1.2",
     "sinon": "^1.17.6",
     "sinon-as-promised": "^4.0.2",
     "sinon-chai": "^2.8.0"
+  },
+  "eslintConfig": {
+    "plugins": ["node"],
+    "extends": ["airbnb-base", "plugin:node/recommended"],
+    "env": {
+      "node": true,
+      "mocha": true
+    },
+    "rules": {
+      "strict": "off",
+      "semi": [
+        "error",
+        "never"
+      ]
+    }
+  },
+  "engines": {
+    "node": "6.10.0"
   }
 }
