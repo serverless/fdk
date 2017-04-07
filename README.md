@@ -17,10 +17,12 @@ Supported providers:
 
 ### `stdlib(fn)` -> `Handler`
 
-Generic function handler. `stdlib(fn)` returns `Handler` objects that wraps `fn` function and provides following features:
+Generic function handler. `stdlib(fn)` returns `Handler` object that wraps `fn` function and provides following features:
 
 - handle returned value
 - handle returned Promise
+
+`Handler` object expose `handler()` function that returns AWS Lambda compatible handler.
 
 Options:
 
