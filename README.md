@@ -2,7 +2,7 @@
 
 > This library is an **experiment**. API will probably change.
 
-[![Build Status](https://travis-ci.org/serverless/stdlib-nodejs.svg?branch=master)](https://travis-ci.org/serverless/stdlib-nodejs)
+[![Build Status](https://travis-ci.org/serverless/stdlib-node.svg?branch=master)](https://travis-ci.org/serverless/stdlib-node)
 
 Features:
 
