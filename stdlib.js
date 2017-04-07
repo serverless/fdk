@@ -1,8 +1,4 @@
-/* eslint func-names: 0 */
-
-'use strict'
-
-class Stdlib {
+module.exports = class Stdlib {
   constructor(lambda) {
     this.lambda = lambda
   }
@@ -44,12 +40,4 @@ class Stdlib {
       })
     })
   }
-
-  handler(fn) {
-    return function (e, ctx, cb) {
-      fn(e, cb)
-    }
-  }
 }
-
-module.exports = Stdlib

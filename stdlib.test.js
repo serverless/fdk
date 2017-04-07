@@ -1,9 +1,6 @@
 /* eslint import/no-extraneous-dependencies: 0 */
 /* eslint node/no-unpublished-require: 0 */
 /* eslint no-unused-expressions: 0 */
-/* eslint func-names: 0 */
-'use strict'
-
 const chai = require('chai')
 const sinonChai = require('sinon-chai')
 const Stdlib = require('./stdlib')
@@ -16,7 +13,7 @@ const expect = chai.expect
 chai.use(sinonChai)
 chai.use(chaiAsPromised)
 
-describe('stdlib', () => {
+describe('Stdlib', () => {
   let lambda
   let stdlib
 
@@ -66,8 +63,6 @@ describe('stdlib', () => {
     it('should callback error if error occured', () => {
       sinon.stub(lambda, 'invoke').yields(new Error('Function not found'))
 
-      stdlib.call('test', null)
-
       return expect(stdlib.call('test')).be
         .rejectedWith(Error, 'Calling function failed: Function not found')
     })
@@ -116,20 +111,6 @@ describe('stdlib', () => {
 
       expect(abort).to.have.been.calledOnce
       return expect(result).be.rejectedWith(Error, 'Calling function failed: Timeout exceeded')
-    })
-  })
-
-  describe('#handler', () => {
-    it('should call provided function with event and callback', () => {
-      const fn = sinon.spy()
-
-      const event = {}
-      const context = {}
-      const callback = function () {}
-      const handler = stdlib.handler(fn)
-      handler(event, context, callback)
-
-      expect(fn).to.have.been.calledWithExactly(event, callback)
     })
   })
 })
