@@ -21,18 +21,17 @@ describe('Handler', () => {
     const context = {}
     const callback = function () {}
 
-    const handler = new Handler(fn)
-    handler.handler()(event, context, callback)
+    new Handler().handler(fn)(event, context, callback)
 
     expect(fn).to.have.been.calledWithExactly(event, context, callback)
   })
 
   it('should support returned promises', (done) => {
-    const handler = new Handler(() => new Promise(resolve => {
+    const handler = new Handler().handler(() => new Promise(resolve => {
       resolve('test')
     }))
 
-    handler.handler()({}, {}, (err, data) => {
+    handler({}, {}, (err, data) => {
       expect(err).to.equal(null)
       expect(data).to.equal('test')
       done()
@@ -40,9 +39,9 @@ describe('Handler', () => {
   })
 
   it('should support returned value', (done) => {
-    const handler = new Handler(() => 'returnedValue')
+    const handler = new Handler().handler(() => 'returnedValue')
 
-    handler.handler()({}, {}, (err, data) => {
+    handler({}, {}, (err, data) => {
       expect(err).to.equal(null)
       expect(data).to.equal('returnedValue')
       done()
