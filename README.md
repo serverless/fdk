@@ -15,14 +15,12 @@ Supported providers:
 
 ## API
 
-### `stdlib(fn)` -> `Handler`
+### `stdlib().handler(fn)` -> AWS Lambda compatible function
 
-Generic function handler. `stdlib(fn)` returns `Handler` object that wraps `fn` function and provides following features:
+Generic function handler. `handler` wraps `fn` function and provides following features:
 
 - handle returned value
 - handle returned Promise
-
-`Handler` object exposes `handler()` function that returns AWS Lambda compatible handler.
 
 Options:
 
@@ -35,21 +33,17 @@ Examples:
 ```javascript
 const stdlib = require('stdlib')
 
-const hello = stdlib((event, ctx) => {
+module.exports.hello = stdlib().handler((event, ctx) => {
   return 'hello'
 })
-
-module.exports.hello = createUser.handler()
 ```
 
 ```javascript
 const stdlib = require('stdlib')
 
-const createUser = stdlib((user, ctx) => {
-  return stdlib.call('saveToDB', user)
+module.exports.createUser = stdlib().handler((user, ctx) => {
+  return stdlib.call('saveToDB', user) // Promise returned
 })
-
-module.exports.createUser = createUser.handler()
 ```
 
 ### `stdlib.call(name, [argument], [options])` -> `Promise`
