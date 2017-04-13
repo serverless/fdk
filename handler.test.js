@@ -47,4 +47,14 @@ describe('Handler', () => {
       done()
     })
   })
+
+  it('should support thrown error', (done) => {
+    const handler = new Handler().handler(() => { throw new Error('test') })
+
+    handler({}, {}, (err, data) => {
+      expect(err).to.be.an('error')
+      expect(data).to.be.undefined
+      done()
+    })
+  })
 })
