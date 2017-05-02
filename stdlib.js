@@ -40,4 +40,17 @@ module.exports = class Stdlib {
       })
     })
   }
+
+  trigger(name, payload) {
+    const params = {
+      FunctionName: name,
+      InvocationType: 'Event',
+      Payload: JSON.stringify(payload),
+    }
+
+    return this.lambda
+      .invoke(params)
+      .promise()
+      .catch(err => Promise.reject(new Error(`Triggering function failed: ${err.message}`)))
+  }
 }

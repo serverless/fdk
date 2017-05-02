@@ -45,8 +45,10 @@ describe('Stdlib', () => {
       })
       sinon.stub(JSON, 'parse').throws(new Error('end of JSON input'))
 
-      return expect(stdlib.call('test'))
-        .be.rejectedWith(Error, 'Parsing response failed: end of JSON input')
+      return expect(stdlib.call('test')).be.rejectedWith(
+        Error,
+        'Parsing response failed: end of JSON input'
+      )
     })
 
     it('should callback error if response is error', () => {
@@ -56,15 +58,19 @@ describe('Stdlib', () => {
         Payload: '{"errorMessage": "Process exited before completing request"}',
       })
 
-      return expect(stdlib.call('test')).be
-        .rejectedWith(Error, 'Calling function failed: Process exited before completing request')
+      return expect(stdlib.call('test')).be.rejectedWith(
+        Error,
+        'Calling function failed: Process exited before completing request'
+      )
     })
 
     it('should callback error if error occured', () => {
       sinon.stub(lambda, 'invoke').yields(new Error('Function not found'))
 
-      return expect(stdlib.call('test')).be
-        .rejectedWith(Error, 'Calling function failed: Function not found')
+      return expect(stdlib.call('test')).be.rejectedWith(
+        Error,
+        'Calling function failed: Function not found'
+      )
     })
 
     it('should invoke req/res function', () => {
@@ -111,6 +117,49 @@ describe('Stdlib', () => {
 
       expect(abort).to.have.been.calledOnce
       return expect(result).be.rejectedWith(Error, 'Calling function failed: Timeout exceeded')
+    })
+  })
+
+  describe('#trigger', () => {
+    it('should invoke event function', () => {
+      sinon.stub(lambda, 'invoke').returns({
+        promise: sinon.stub().resolves({}),
+      })
+
+      stdlib.trigger('test', null)
+
+      return expect(lambda.invoke).to.have.been.calledWith({
+        FunctionName: 'test',
+        InvocationType: 'Event',
+        Payload: 'null',
+      })
+    })
+
+    it('should invoke function with provided argument as JSON string', () => {
+      sinon.stub(lambda, 'invoke').returns({
+        promise: sinon.stub().resolves({}),
+      })
+
+      stdlib.trigger('test', {
+        key: 'value',
+      })
+
+      return expect(lambda.invoke).to.have.been.calledWith({
+        FunctionName: 'test',
+        InvocationType: 'Event',
+        Payload: '{"key":"value"}',
+      })
+    })
+
+    it('should callback error if error occured', () => {
+      sinon.stub(lambda, 'invoke').returns({
+        promise: sinon.stub().rejects(new Error('Function not found')),
+      })
+
+      return expect(stdlib.trigger('test')).be.rejectedWith(
+        Error,
+        'Triggering function failed: Function not found'
+      )
     })
   })
 })
