@@ -9,3 +9,4 @@ const stdlib = new Stdlib(new AWS.Lambda({
 }))
 
 exports.call = stdlib.call
+exports.trigger = stdlib.trigger
