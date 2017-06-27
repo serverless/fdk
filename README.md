@@ -1,4 +1,4 @@
-# Serverless Standard Library for Node.js
+# Function Development Kit
 
 > This library is an **experiment**. API will probably change.
 
