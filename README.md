@@ -31,7 +31,7 @@ Options:
 Examples:
 
 ```javascript
-const fdk = require('fdk')
+const fdk = require('@serverless/fdk')
 
 module.exports.hello = fdk().handler((event, ctx) => {
   return 'hello'
@@ -39,7 +39,7 @@ module.exports.hello = fdk().handler((event, ctx) => {
 ```
 
 ```javascript
-const fdk = require('fdk')
+const fdk = require('@serverless/fdk')
 
 module.exports.createUser = fdk().handler((user, ctx) => {
   return fdk.call('saveToDB', user) // Promise returned
