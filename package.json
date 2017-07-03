@@ -31,10 +31,18 @@
     },
     "rules": {
       "strict": "off",
+      "node/no-unsupported-features": "error",
       "semi": [
         "error",
         "never"
+      ],
+      "arrow-parens": [
+        "error",
+        "as-needed"
       ]
     }
+  },
+  "engines": {
+    "node": "6.10.0"
   }
 }

@@ -26,10 +26,13 @@ describe('Handler', () => {
     expect(fn).to.have.been.calledWithExactly(event, context, callback)
   })
 
-  it('should support returned promises', (done) => {
-    const handler = new Handler().handler(() => new Promise(resolve => {
-      resolve('test')
-    }))
+  it('should support returned promises', done => {
+    const handler = new Handler().handler(
+      () =>
+        new Promise(resolve => {
+          resolve('test')
+        })
+    )
 
     handler({}, {}, (err, data) => {
       expect(err).to.equal(null)
@@ -38,7 +41,7 @@ describe('Handler', () => {
     })
   })
 
-  it('should support returned value', (done) => {
+  it('should support returned value', done => {
     const handler = new Handler().handler(() => 'returnedValue')
 
     handler({}, {}, (err, data) => {
@@ -48,8 +51,10 @@ describe('Handler', () => {
     })
   })
 
-  it('should support thrown error', (done) => {
-    const handler = new Handler().handler(() => { throw new Error('test') })
+  it('should support thrown error', done => {
+    const handler = new Handler().handler(() => {
+      throw new Error('test')
+    })
 
     handler({}, {}, (err, data) => {
       expect(err).to.be.an('error')

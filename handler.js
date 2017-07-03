@@ -5,9 +5,11 @@ module.exports = class Handler {
         const result = original(event, ctx, cb)
 
         if (result && typeof result.then === 'function') {
-          result.then(val => {
-            cb(null, val)
-          }).catch(cb)
+          result
+            .then(val => {
+              cb(null, val)
+            })
+            .catch(cb)
           return
         }
         cb(null, result)
