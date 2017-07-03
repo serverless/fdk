@@ -46,9 +46,9 @@ module.exports.createUser = fdk.handler((user, ctx) => {
 })
 ```
 
-### `fdk.call(name, [argument], [options])` -> `Promise`
+### `fdk.invoke(name, [argument], [options])` -> `Promise`
 
-Invoke function
+Invoke a function
 
 Options:
 
