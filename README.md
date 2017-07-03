@@ -15,7 +15,7 @@ Supported providers:
 
 ## API
 
-### `fdk().handler(fn)` -> AWS Lambda compatible function
+### `fdk.handler(fn)` -> AWS Lambda compatible function
 
 Generic function handler. `handler` wraps `fn` function and provides following features:
 
@@ -33,7 +33,7 @@ Examples:
 ```javascript
 const fdk = require('@serverless/fdk')
 
-module.exports.hello = fdk().handler((event, ctx) => {
+module.exports.hello = fdk.handler((event, ctx) => {
   return 'hello'
 })
 ```
@@ -41,7 +41,7 @@ module.exports.hello = fdk().handler((event, ctx) => {
 ```javascript
 const fdk = require('@serverless/fdk')
 
-module.exports.createUser = fdk().handler((user, ctx) => {
+module.exports.createUser = fdk.handler((user, ctx) => {
   return fdk.invoke('saveToDB', user) // Promise returned
 })
 ```
