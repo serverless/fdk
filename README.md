@@ -42,17 +42,17 @@ module.exports.hello = fdk().handler((event, ctx) => {
 const fdk = require('@serverless/fdk')
 
 module.exports.createUser = fdk().handler((user, ctx) => {
-  return fdk.call('saveToDB', user) // Promise returned
+  return fdk.invoke('saveToDB', user) // Promise returned
 })
 ```
 
 ### `fdk.call(name, [argument], [options])` -> `Promise`
 
-Call function
+Invoke function
 
 Options:
 
 - name - `string` - function name,
-- argument (optional) - any type - argument to pass to called function,
+- argument (optional) - any type - argument to pass to invoked function,
 - options (optional) - `object`:
-  - timeout - `number` - function call timeout in milliseconds. If function call exceeds timeout error is called back.
+  - timeout - `number` - function invoke timeout in milliseconds. If function invocation exceeds timeout error is called back.

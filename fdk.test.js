@@ -26,14 +26,14 @@ describe('FDK', () => {
     sinon.restore()
   })
 
-  describe('#call', () => {
+  describe('#invoke', () => {
     it('should callback parsed invocation result', () => {
       sinon.stub(lambda, 'invoke').yields(null, {
         StatusCode: 200,
         Payload: '{"testKey": "testValue"}',
       })
 
-      return expect(fdk.call('test')).to.eventually.eql({
+      return expect(fdk.invoke('test')).to.eventually.eql({
         testKey: 'testValue',
       })
     })
@@ -45,7 +45,7 @@ describe('FDK', () => {
       })
       sinon.stub(JSON, 'parse').throws(new Error('end of JSON input'))
 
-      return expect(fdk.call('test')).be.rejectedWith(
+      return expect(fdk.invoke('test')).be.rejectedWith(
         Error,
         'Parsing response failed: end of JSON input'
       )
@@ -58,7 +58,7 @@ describe('FDK', () => {
         Payload: '{"errorMessage": "Process exited before completing request"}',
       })
 
-      return expect(fdk.call('test')).be.rejectedWith(
+      return expect(fdk.invoke('test')).be.rejectedWith(
         Error,
         'Calling function failed: Process exited before completing request'
       )
@@ -67,7 +67,7 @@ describe('FDK', () => {
     it('should callback error if error occured', () => {
       sinon.stub(lambda, 'invoke').yields(new Error('Function not found'))
 
-      return expect(fdk.call('test')).be.rejectedWith(
+      return expect(fdk.invoke('test')).be.rejectedWith(
         Error,
         'Calling function failed: Function not found'
       )
@@ -78,7 +78,7 @@ describe('FDK', () => {
         promise: sinon.stub().resolves({}),
       })
 
-      fdk.call('test', null)
+      fdk.invoke('test', null)
 
       return expect(lambda.invoke).to.have.been.calledWith({
         FunctionName: 'test',
@@ -92,7 +92,7 @@ describe('FDK', () => {
         promise: sinon.stub().resolves({}),
       })
 
-      fdk.call('test', {
+      fdk.invoke('test', {
         key: 'value',
       })
 
@@ -110,7 +110,7 @@ describe('FDK', () => {
       })
       const clock = sinon.useFakeTimers()
 
-      const result = fdk.call('test', null, {
+      const result = fdk.invoke('test', null, {
         timeout: 1000,
       })
       clock.tick(1000)

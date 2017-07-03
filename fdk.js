@@ -3,7 +3,7 @@ module.exports = class FDK {
     this.lambda = lambda
   }
 
-  call(name, argument, options) {
+  invoke(name, argument, options) {
     return new Promise((resolve, reject) => {
       let invokeRequest
 
