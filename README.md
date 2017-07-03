@@ -1,8 +1,8 @@
-# Serverless Standard Library for Node.js
+# Function Development Kit
 
 > This library is an **experiment**. API will probably change.
 
-[![Build Status](https://travis-ci.org/serverless/stdlib-node.svg?branch=master)](https://travis-ci.org/serverless/stdlib-node)
+[![Build Status](https://travis-ci.org/serverless/fdk.svg?branch=master)](https://travis-ci.org/serverless/fdk)
 
 Features:
 
@@ -15,7 +15,7 @@ Supported providers:
 
 ## API
 
-### `stdlib().handler(fn)` -> AWS Lambda compatible function
+### `fdk().handler(fn)` -> AWS Lambda compatible function
 
 Generic function handler. `handler` wraps `fn` function and provides following features:
 
@@ -31,22 +31,22 @@ Options:
 Examples:
 
 ```javascript
-const stdlib = require('stdlib')
+const fdk = require('@serverless/fdk')
 
-module.exports.hello = stdlib().handler((event, ctx) => {
+module.exports.hello = fdk().handler((event, ctx) => {
   return 'hello'
 })
 ```
 
 ```javascript
-const stdlib = require('stdlib')
+const fdk = require('@serverless/fdk')
 
-module.exports.createUser = stdlib().handler((user, ctx) => {
-  return stdlib.call('saveToDB', user) // Promise returned
+module.exports.createUser = fdk().handler((user, ctx) => {
+  return fdk.call('saveToDB', user) // Promise returned
 })
 ```
 
-### `stdlib.call(name, [argument], [options])` -> `Promise`
+### `fdk.call(name, [argument], [options])` -> `Promise`
 
 Call function
 

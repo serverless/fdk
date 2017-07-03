@@ -1,4 +1,4 @@
-module.exports = class Stdlib {
+module.exports = class FDK {
   constructor(lambda) {
     this.lambda = lambda
   }

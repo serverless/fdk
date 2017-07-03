@@ -3,7 +3,7 @@
 /* eslint no-unused-expressions: 0 */
 const chai = require('chai')
 const sinonChai = require('sinon-chai')
-const Stdlib = require('./stdlib')
+const FDK = require('./fdk')
 const AWS = require('aws-sdk')
 const sinon = require('sinon').sandbox.create()
 const chaiAsPromised = require('chai-as-promised')
@@ -13,13 +13,13 @@ const expect = chai.expect
 chai.use(sinonChai)
 chai.use(chaiAsPromised)
 
-describe('Stdlib', () => {
+describe('FDK', () => {
   let lambda
-  let stdlib
+  let fdk
 
   beforeEach(() => {
     lambda = new AWS.Lambda()
-    stdlib = new Stdlib(lambda)
+    fdk = new FDK(lambda)
   })
 
   afterEach(() => {
@@ -33,7 +33,7 @@ describe('Stdlib', () => {
         Payload: '{"testKey": "testValue"}',
       })
 
-      return expect(stdlib.call('test')).to.eventually.eql({
+      return expect(fdk.call('test')).to.eventually.eql({
         testKey: 'testValue',
       })
     })
@@ -45,7 +45,7 @@ describe('Stdlib', () => {
       })
       sinon.stub(JSON, 'parse').throws(new Error('end of JSON input'))
 
-      return expect(stdlib.call('test')).be.rejectedWith(
+      return expect(fdk.call('test')).be.rejectedWith(
         Error,
         'Parsing response failed: end of JSON input'
       )
@@ -58,7 +58,7 @@ describe('Stdlib', () => {
         Payload: '{"errorMessage": "Process exited before completing request"}',
       })
 
-      return expect(stdlib.call('test')).be.rejectedWith(
+      return expect(fdk.call('test')).be.rejectedWith(
         Error,
         'Calling function failed: Process exited before completing request'
       )
@@ -67,7 +67,7 @@ describe('Stdlib', () => {
     it('should callback error if error occured', () => {
       sinon.stub(lambda, 'invoke').yields(new Error('Function not found'))
 
-      return expect(stdlib.call('test')).be.rejectedWith(
+      return expect(fdk.call('test')).be.rejectedWith(
         Error,
         'Calling function failed: Function not found'
       )
@@ -78,7 +78,7 @@ describe('Stdlib', () => {
         promise: sinon.stub().resolves({}),
       })
 
-      stdlib.call('test', null)
+      fdk.call('test', null)
 
       return expect(lambda.invoke).to.have.been.calledWith({
         FunctionName: 'test',
@@ -92,7 +92,7 @@ describe('Stdlib', () => {
         promise: sinon.stub().resolves({}),
       })
 
-      stdlib.call('test', {
+      fdk.call('test', {
         key: 'value',
       })
 
@@ -110,7 +110,7 @@ describe('Stdlib', () => {
       })
       const clock = sinon.useFakeTimers()
 
-      const result = stdlib.call('test', null, {
+      const result = fdk.call('test', null, {
         timeout: 1000,
       })
       clock.tick(1000)
@@ -126,7 +126,7 @@ describe('Stdlib', () => {
         promise: sinon.stub().resolves({}),
       })
 
-      stdlib.trigger('test', null)
+      fdk.trigger('test', null)
 
       return expect(lambda.invoke).to.have.been.calledWith({
         FunctionName: 'test',
@@ -140,7 +140,7 @@ describe('Stdlib', () => {
         promise: sinon.stub().resolves({}),
       })
 
-      stdlib.trigger('test', {
+      fdk.trigger('test', {
         key: 'value',
       })
 
@@ -156,7 +156,7 @@ describe('Stdlib', () => {
         promise: sinon.stub().rejects(new Error('Function not found')),
       })
 
-      return expect(stdlib.trigger('test')).be.rejectedWith(
+      return expect(fdk.trigger('test')).be.rejectedWith(
         Error,
         'Triggering function failed: Function not found'
       )
