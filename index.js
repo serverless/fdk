@@ -8,6 +8,6 @@ const fdk = new FDK(
   })
 )
 
-exports.call = fdk.call
+exports.invoke = fdk.invoke
 exports.trigger = fdk.trigger
 exports.handler = handler => new Handler().handler(handler)
