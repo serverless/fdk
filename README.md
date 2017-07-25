@@ -9,7 +9,7 @@
 ES5
 
 ```js
-import fdk from 'fdk';
+const fdk = require('fdk');
 const gateway = fdk.createGatewayClient({
   host: 'localhost:3000'
   version: 'v1' // optional and defaults to v1 fro the REST API version
