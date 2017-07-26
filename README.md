@@ -6,14 +6,10 @@
 
 #### Create an Event Gateway Client
 
-ES5
-
 ```js
 const fdk = require('fdk');
 const gateway = fdk.createEventGatewayClient({
   host: 'localhost:3000'
-  version: 'v1' // optional and defaults to v1 fro the REST API version
-  fetchClient: fetch // optional property allowing the developer to provide their own http lib
 })
 ```
 
@@ -23,8 +19,6 @@ ES2015
 import { createEventGatewayClient } from 'fdk';
 const gateway = createEventGatewayClient({
   host: 'localhost:3000'
-  version: 'v1' // optional and default to v1
-  fetchClient: fetch // optional property allowing the developer to provide their own http lib
 })
 ```
 
@@ -32,8 +26,11 @@ Optional Properties for `createEventGatewayClient`
 
 ```js
 {
-  version: 'v2' // defaults to 'v1' and represents the Event Gateway API version to connect to
-  fetchClient: fetch // optional property allowing the developer to provide their own http lib. ideal for mocking or to cover edge cases like passing in special headers for passing a proxy
+  // defaults to 'v1' and represents the Event Gateway API version to connect to
+  version: 'v2'
+  // optional property allowing the developer to provide their own http lib
+  // ideal for mocking or to cover edge cases like passing in special headers
+  fetchClient: fetch
 }
 ```
 
@@ -141,11 +138,7 @@ Returns a Promise with the response.
 ```js
 gateway.emit({
   event: "image.upload",
-  encoding: "binary",
   data: <binary>,
-  meta: {
-    filename: "some-photo.png"
-  }
 })
 ```
 
