@@ -4,7 +4,8 @@
   "license": "MIT",
   "repository": "https://github.com/serverless/fdk",
   "scripts": {
-    "lint": "eslint ."
+    "lint": "eslint .",
+    "test": "jest"
   },
   "dependencies": {
     "aws-sdk": "^2.6.14"
@@ -17,28 +18,17 @@
     "jest": "^20.0.4"
   },
   "eslintConfig": {
-    "plugins": [
-      "node"
-    ],
-    "extends": [
-      "airbnb-base",
-      "plugin:node/recommended"
-    ],
+    "plugins": ["node"],
+    "extends": ["airbnb-base", "plugin:node/recommended"],
     "env": {
       "node": true,
-      "mocha": true
+      "jest": true
     },
     "rules": {
       "strict": "off",
       "node/no-unsupported-features": "error",
-      "semi": [
-        "error",
-        "never"
-      ],
-      "arrow-parens": [
-        "error",
-        "as-needed"
-      ]
+      "semi": ["error", "never"],
+      "arrow-parens": ["error", "as-needed"]
     }
   },
   "engines": {
