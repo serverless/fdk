@@ -4,23 +4,16 @@
   "license": "MIT",
   "repository": "https://github.com/serverless/fdk",
   "scripts": {
-    "lint": "eslint .",
-    "test": "mocha ./*.test.js"
+    "lint": "eslint ."
   },
   "dependencies": {
     "aws-sdk": "^2.6.14"
   },
   "devDependencies": {
-    "chai": "^3.5.0",
-    "chai-as-promised": "^6.0.0",
     "eslint": "^3.3.1",
     "eslint-config-airbnb-base": "^5.0.3",
     "eslint-plugin-import": "^1.8.1",
-    "eslint-plugin-node": "^4.0.1",
-    "mocha": "^3.1.2",
-    "sinon": "^1.17.6",
-    "sinon-as-promised": "^4.0.2",
-    "sinon-chai": "^2.8.0"
+    "eslint-plugin-node": "^4.0.1"
   },
   "eslintConfig": {
     "plugins": [
