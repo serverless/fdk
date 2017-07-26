@@ -23,8 +23,13 @@
     "sinon-chai": "^2.8.0"
   },
   "eslintConfig": {
-    "plugins": ["node"],
-    "extends": ["airbnb-base", "plugin:node/recommended"],
+    "plugins": [
+      "node"
+    ],
+    "extends": [
+      "airbnb-base",
+      "plugin:node/recommended"
+    ],
     "env": {
       "node": true,
       "mocha": true
