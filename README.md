@@ -37,8 +37,6 @@ Optional Properties for `createGatewayClient`
 }
 ```
 
-API Design Background: As an alternative we could have used `const gateway = new Gateway({ options })`. I suggest we avoid using the `new` keyword at all as if the user leaves it out this would be an issue hard to discover. In addition I suggest to go agains `import FDK from 'fdk'; const fdk = new FDK()` as this doesn't mention anywhere in the code that this instantiates a Gateway client nor does it remove the ability to extend the FDK module going forward by another Client or utils.
-
 #### Configure a Gateway
 
 Configure accepts an object of function and subscription definitions. The idea of exposing one configuration function is to provide developers with convenient utility to configure a Gateway in one call rather then dealing with a chain of Promise based calls. Nevertheless in addition we expose a wrapper function for each low-level API call to the Gateway
