@@ -26,8 +26,6 @@ Optional Properties for `createEventGatewayClient`
 
 ```js
 {
-  // defaults to 'v1' and represents the Event Gateway API version to connect to
-  version: 'v2'
   // optional property allowing the developer to provide their own http lib
   // ideal for mocking or to cover edge cases like passing in special headers
   fetchClient: fetch
