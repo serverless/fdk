@@ -4,13 +4,13 @@
 
 [![Build Status](https://travis-ci.org/serverless/fdk.svg?branch=master)](https://travis-ci.org/serverless/fdk)
 
-#### Create a Gateway Client
+#### Create an Event Gateway Client
 
 ES5
 
 ```js
 const fdk = require('fdk');
-const gateway = fdk.createGatewayClient({
+const gateway = fdk.createEventGatewayClient({
   host: 'localhost:3000'
   version: 'v1' // optional and defaults to v1 fro the REST API version
   fetchClient: fetch // optional property allowing the developer to provide their own http lib
@@ -20,26 +20,26 @@ const gateway = fdk.createGatewayClient({
 ES2015
 
 ```js
-import { createGatewayClient } from 'fdk';
-const gateway = createGatewayClient({
+import { createEventGatewayClient } from 'fdk';
+const gateway = createEventGatewayClient({
   host: 'localhost:3000'
   version: 'v1' // optional and default to v1
   fetchClient: fetch // optional property allowing the developer to provide their own http lib
 })
 ```
 
-Optional Properties for `createGatewayClient`
+Optional Properties for `createEventGatewayClient`
 
 ```js
 {
-  version: 'v2' // defaults to 'v1' and represents the Gateway API version to connect to
+  version: 'v2' // defaults to 'v1' and represents the Event Gateway API version to connect to
   fetchClient: fetch // optional property allowing the developer to provide their own http lib. ideal for mocking or to cover edge cases like passing in special headers for passing a proxy
 }
 ```
 
-#### Configure a Gateway
+#### Configure an Event Gateway
 
-Configure accepts an object of function and subscription definitions. The idea of exposing one configuration function is to provide developers with convenient utility to configure a Gateway in one call rather then dealing with a chain of Promise based calls. Nevertheless in addition we expose a wrapper function for each low-level API call to the Gateway
+Configure accepts an object of function and subscription definitions. The idea of exposing one configuration function is to provide developers with convenient utility to configure an Event Gateway in one call rather then dealing with a chain of Promise based calls. Nevertheless in addition we expose a wrapper function for each low-level API call to the Event Gateway
 
 ```js
 gateway.configure({
@@ -110,9 +110,9 @@ console.log(response)
 
 ##### Internal Steps
 
-1. Retrieve all the subscriptions from the Gateway
+1. Retrieve all the subscriptions from the Event Gateway
 2. Remove all the existing subscriptions
-3. Retrieve all the functions from the Gateway
+3. Retrieve all the functions from the Event Gateway
 4. Remove all the existing functions
 5. Create all described functions
 6. Create all described subscriptions
@@ -149,7 +149,7 @@ gateway.emit({
 })
 ```
 
-Returns a Promise and when resolved the response only indicates if the Gateway received the event.
+Returns a Promise and when resolved the response only indicates if the Event Gateway received the event.
 Responses from any subscribed functions are not part of the response.
 
 ##### To be discussed
@@ -170,7 +170,7 @@ module.exports.run = handler(event => {
 
 Middlewares will be implemented at a later stage.
 
-#### Further Gateway Functions
+#### Further Event Gateway Functions
 
 ```js
 gateway.registerFunction({
