@@ -5,7 +5,7 @@ let eventGatewayProcess
 
 beforeAll(() => {
   const gatewayPath = path.join(__dirname, 'event-gateway', 'darwin_amd64', 'event-gateway')
-  eventGatewayProcess = spawn(gatewayPath)
+  eventGatewayProcess = spawn(gatewayPath, ['--dev'], { stdio: 'inherit' })
 })
 
 afterAll(() => {
@@ -13,6 +13,9 @@ afterAll(() => {
   eventGatewayProcess.kill()
 })
 
-test('placholder', () => {
-  expect(true).toBeTruthy()
+test('placholder', done => {
+  setTimeout(() => {
+    expect(true).toBeTruthy()
+    done()
+  }, 2000)
 })
