@@ -22,28 +22,32 @@ const createEventGatewayClient = config => {
     )
   }
 
+  const protocol = config.protocol || 'http'
+  const configurationProtocol = config.configurationPort || 4001
+  const apiPort = config.port || 4000
+  const configurationPort = config.configurationPort || 4001
+
   const gatewayConfig = {
     gatewayConfig: {
       hostname: config.hostname,
-      apiPort: config.port || 4000,
-      configurationPort: config.configurationPort || 4001,
-      protocol: config.protocol || 'http',
+      apiOrigin: `${protocol}://${config.hostname}:${apiPort}`,
+      configurationOrigin: `${configurationProtocol}://${config.hostname}:${configurationPort}`,
       // eslint-disable-next-line global-require
       fetch: config.fetch || require('isomorphic-fetch'),
     },
   }
 
   return {
-    emit: params => emit(R.merge(params, gatewayConfig)),
-    invoke: params => invoke(R.merge(params, gatewayConfig)),
-    configure: params => configure(R.merge(params, gatewayConfig)),
-    resetConfiguration: params => resetConfiguration(R.merge(params, gatewayConfig)),
-    addFunction: params => addFunction(R.merge(params, gatewayConfig)),
-    deleteFunction: params => deleteFunction(R.merge(params, gatewayConfig)),
-    listFunctions: params => listFunctions(R.merge(params, gatewayConfig)),
-    addSubscription: params => addSubscription(R.merge(params, gatewayConfig)),
-    deleteSubscription: params => deleteSubscription(R.merge(params, gatewayConfig)),
-    listSubscriptions: params => listSubscriptions(R.merge(params, gatewayConfig)),
+    emit: params => emit(gatewayConfig, params),
+    invoke: params => invoke(gatewayConfig, params),
+    configure: params => configure(gatewayConfig, params),
+    resetConfiguration: params => resetConfiguration(gatewayConfig, params),
+    addFunction: params => addFunction(gatewayConfig, params),
+    deleteFunction: params => deleteFunction(gatewayConfig, params),
+    listFunctions: params => listFunctions(gatewayConfig, params),
+    addSubscription: params => addSubscription(gatewayConfig, params),
+    deleteSubscription: params => deleteSubscription(gatewayConfig, params),
+    listSubscriptions: params => listSubscriptions(gatewayConfig, params),
   }
 }
 
