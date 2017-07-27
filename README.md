@@ -26,7 +26,7 @@ Optional Properties for `createEventGatewayClient`
 
 ```js
 {
-  // defaults to 80
+  // defaults to the default Gateway configuration port
   port: '8080', 
   // by default 'https' but we also support 'http'
   protocol: 'http'
