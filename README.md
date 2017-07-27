@@ -9,7 +9,7 @@
 ```js
 const fdk = require('fdk');
 const gateway = fdk.createEventGatewayClient({
-  host: 'localhost:3000'
+  hostname: 'localhost',
 })
 ```
 
@@ -18,7 +18,7 @@ ES2015
 ```js
 import { createEventGatewayClient } from 'fdk';
 const gateway = createEventGatewayClient({
-  host: 'localhost:3000'
+  hostname: 'localhost',
 })
 ```
 
@@ -26,6 +26,12 @@ Optional Properties for `createEventGatewayClient`
 
 ```js
 {
+  // defaults to the default Gateway configuration port
+  port: '8080', 
+  // by default 'https' but we also support 'http'
+  protocol: 'http'
+  // defaults to the default Gateway configuration port
+  configurationPort: '3001'
   // optional property allowing the developer to provide their own http lib
   // ideal for mocking or to cover edge cases like passing in special headers
   fetchClient: fetch
