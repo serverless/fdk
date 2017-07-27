@@ -29,7 +29,7 @@ Optional Properties for `createEventGatewayClient`
   // defaults to 80
   port: '8080', 
   // by default 'https' but we also support 'http'
-  protocol: 
+  protocol: 'http'
   // defaults to the default Gateway configuration port
   configurationPort: '3001'
   // optional property allowing the developer to provide their own http lib
