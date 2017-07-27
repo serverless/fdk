@@ -8,7 +8,9 @@
     "test": "jest"
   },
   "dependencies": {
-    "aws-sdk": "^2.6.14"
+    "aws-sdk": "^2.6.14",
+    "isomorphic-fetch": "^2.2.1",
+    "ramda": "^0.24.1"
   },
   "devDependencies": {
     "eslint": "^3.3.1",
@@ -18,8 +20,13 @@
     "jest": "^20.0.4"
   },
   "eslintConfig": {
-    "plugins": ["node"],
-    "extends": ["airbnb-base", "plugin:node/recommended"],
+    "plugins": [
+      "node"
+    ],
+    "extends": [
+      "airbnb-base",
+      "plugin:node/recommended"
+    ],
     "env": {
       "node": true,
       "jest": true
@@ -27,8 +34,14 @@
     "rules": {
       "strict": "off",
       "node/no-unsupported-features": "error",
-      "semi": ["error", "never"],
-      "arrow-parens": ["error", "as-needed"]
+      "semi": [
+        "error",
+        "never"
+      ],
+      "arrow-parens": [
+        "error",
+        "as-needed"
+      ]
     }
   },
   "engines": {

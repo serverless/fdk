@@ -1,11 +1,13 @@
 const path = require('path')
 const spawn = require('child_process').spawn
 
+const apiPort = 8084
+
 let eventGatewayProcess
 
 beforeAll(() => {
   const gatewayPath = path.join(__dirname, 'event-gateway', 'darwin_amd64', 'event-gateway')
-  eventGatewayProcess = spawn(gatewayPath, ['--dev'], { stdio: 'inherit' })
+  eventGatewayProcess = spawn(gatewayPath, ['--dev', `-api-port=${apiPort}`], { stdio: 'inherit' })
 })
 
 afterAll(() => {
@@ -22,6 +24,8 @@ afterAll(() => {
 // implement registerFunction
 // implement listFunctions
 // implement deleteFunction
+
+//
 
 // 8000
 // 8080
