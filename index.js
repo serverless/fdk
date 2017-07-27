@@ -10,20 +10,26 @@ const resetConfiguration = require('./lib/resetConfiguration')
 const emit = require('./lib/emit')
 const invoke = require('./lib/invoke')
 
-const createEventGatewayClient = options => {
-  // TODO throw error if hostname is not defined
-  if (options.hostname) {
-    console.log()
+const createEventGatewayClient = config => {
+  if (
+    R.isNil(config) ||
+    typeof config !== 'object' ||
+    R.isNil(config.hostname) ||
+    typeof config.hostname !== 'string'
+  ) {
+    throw new Error(
+      "Please provide an object with the property 'hostname' to createEventGatewayClient"
+    )
   }
 
   const gatewayConfig = {
     gatewayConfig: {
-      hostname: options.hostname,
-      apiPort: options.port || 4000,
-      configurationPort: options.configurationPort || 4001,
-      protocol: options.protocol || 'http',
+      hostname: config.hostname,
+      apiPort: config.port || 4000,
+      configurationPort: config.configurationPort || 4001,
+      protocol: config.protocol || 'http',
       // eslint-disable-next-line global-require
-      fetch: options.fetch || require('isomorphic-fetch'),
+      fetch: config.fetch || require('isomorphic-fetch'),
     },
   }
 
@@ -43,5 +49,5 @@ const createEventGatewayClient = options => {
 
 module.exports = {
   createEventGatewayClient,
-  // TODO implement handler
+  // TODO implement and export handler
 }
