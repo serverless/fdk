@@ -4,6 +4,12 @@
 
 [![Build Status](https://travis-ci.org/serverless/fdk.svg?branch=master)](https://travis-ci.org/serverless/fdk)
 
+## Install
+
+```bash
+npm install @serverless/fdk
+```
+
 ## Create an Event Gateway Client
 
 ```js
@@ -203,3 +209,15 @@ gateway.removeSubscription({
 
 gateway.listSubscriptions()
 ```
+
+## Development
+
+```
+npm install
+```
+
+```js
+npm run test
+```
+
+We also highly recommend to check out the [Contributing](https://github.com/serverless/fdk/blob/master/CONTRIBUTING.md) document as it explains some of the design decisions for this library.

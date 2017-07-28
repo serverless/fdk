@@ -1,13 +1,7 @@
 language: node_js
-
 sudo: false
-matrix:
-  include:
-    - node_js: '6.10'
-
-install:
-  - travis_retry npm install
-
+node_js:
+- 8
 script:
-  - npm test
-  - npm run lint
+- npm test
+- npm run lint
