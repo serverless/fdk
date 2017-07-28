@@ -5,8 +5,8 @@
   "repository": "https://github.com/serverless/fdk",
   "scripts": {
     "lint": "eslint .",
-    "test": "jest",
-    "test:watch": "jest --watch"
+    "test": "jest --maxWorkers=1",
+    "test:watch": "jest --watch --maxWorkers=1"
   },
   "dependencies": {
     "aws-sdk": "^2.6.14",
@@ -19,7 +19,6 @@
     "eslint-plugin-import": "^1.8.1",
     "eslint-plugin-node": "^4.0.1",
     "jest": "^20.0.4",
-    "portfinder": "^1.0.13",
     "rimraf": "^2.6.1",
     "uuid": "^3.1.0"
   },

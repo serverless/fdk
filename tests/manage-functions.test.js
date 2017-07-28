@@ -13,14 +13,21 @@ let eventGateway
 let eventGatewayProcessId
 
 beforeAll(() =>
-  eventGatewayProcesses.spawn().then(processInfo => {
-    eventGatewayProcessId = processInfo.id
-    eventGateway = fdk.createEventGatewayClient({
-      hostname: 'localhost',
-      configurationProtocol: 'http',
-      configurationPort: processInfo.configPort,
+  eventGatewayProcesses
+    .spawn({
+      configPort: 4001,
+      apiPort: 4002,
+      // embedPeerPort: 4003,
+      // embedCliPort: 4004,
     })
-  })
+    .then(processInfo => {
+      eventGatewayProcessId = processInfo.id
+      eventGateway = fdk.createEventGatewayClient({
+        hostname: 'localhost',
+        configurationProtocol: 'http',
+        configurationPort: processInfo.configPort,
+      })
+    })
 )
 
 afterAll(() => {
