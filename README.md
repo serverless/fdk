@@ -19,7 +19,7 @@ const gateway = fdk.createEventGatewayClient({
 })
 ```
 
-ES2015
+ES2015+
 
 ```js
 import { createEventGatewayClient } from 'fdk';
