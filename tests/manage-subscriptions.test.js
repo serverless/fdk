@@ -10,7 +10,12 @@ const functionConfig = {
   },
 }
 
-const subscriptionConfig = { functionId: 'hello', event: 'pageVisited' }
+const subscriptionConfig = { functionId: 'subscription-test-function', event: 'pageVisited' }
+const subscription = {
+  functionId: 'subscription-test-function',
+  event: 'pageVisited',
+  subscriptionId: 'pageVisited-subscription-test-function',
+}
 
 let eventGateway
 let eventGatewayProcessId
@@ -44,27 +49,25 @@ test('should add a function to the gateway', () => {
   })
 })
 
-// test('should add a subscription to the gateway', () => {
-//   expect.assertions(1)
-//   return eventGateway.addSubscription(subscriptionConfig).then(response => {
-//     expect(response).toEqual({
-//       functionId: 'hello',
-//       event: 'pageVisited',
-//       subscriptionId: 'pageVisited-hello',
-//     })
-//   })
-// })
+test('should add a subscription to the gateway', () => {
+  expect.assertions(1)
+  return eventGateway.addSubscription(subscriptionConfig).then(response => {
+    expect(response).toEqual(subscription)
+  })
+})
 
-// test('should list the added subscriptions', () => {
-//   expect.assertions(1)
-//   return eventGateway.listSubscriptions().then(response => {
-//     expect(response).toEqual({ subscriptions: [subscriptionConfig] })
-//   })
-// })
-//
-// test('should remove the added subscription', () => {
-//   expect.assertions(1)
-//   return eventGateway.deleteSubscription({ functionId: 'hello' }).then(response => {
-//     expect(response).toBeUndefined()
-//   })
-// })
+test('should list the added subscriptions', () => {
+  expect.assertions(1)
+  return eventGateway.listSubscriptions().then(response => {
+    expect(response).toEqual({ subscriptions: [subscription] })
+  })
+})
+
+test('should remove the added subscription', () => {
+  expect.assertions(1)
+  return eventGateway
+    .deleteSubscription({ subscriptionId: 'pageVisited-subscription-test-function' })
+    .then(response => {
+      expect(response).toBeUndefined()
+    })
+})
