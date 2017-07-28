@@ -10,44 +10,41 @@ const resetConfiguration = require('./lib/resetConfiguration')
 const emit = require('./lib/emit')
 const invoke = require('./lib/invoke')
 
-const createEventGatewayClient = config => {
+const createEventGatewayClient = configuration => {
   if (
-    R.isNil(config) ||
-    typeof config !== 'object' ||
-    R.isNil(config.hostname) ||
-    typeof config.hostname !== 'string'
+    R.isNil(configuration) ||
+    typeof configuration !== 'object' ||
+    R.isNil(configuration.hostname) ||
+    typeof configuration.hostname !== 'string'
   ) {
     throw new Error(
       "Please provide an object with the property 'hostname' to createEventGatewayClient"
     )
   }
 
-  const protocol = config.protocol || 'http'
-  const configurationProtocol = config.configurationPort || 4001
-  const apiPort = config.port || 4000
-  const configurationPort = config.configurationPort || 4001
+  const protocol = configuration.protocol || 'https'
+  const configurationProtocol = configuration.configurationProtocol || 'https'
+  const apiPort = configuration.port || 4000
+  const configurationPort = configuration.configurationPort || 4001
 
-  const gatewayConfig = {
-    gatewayConfig: {
-      hostname: config.hostname,
-      apiOrigin: `${protocol}://${config.hostname}:${apiPort}`,
-      configurationOrigin: `${configurationProtocol}://${config.hostname}:${configurationPort}`,
-      // eslint-disable-next-line global-require
-      fetch: config.fetch || require('isomorphic-fetch'),
-    },
+  const config = {
+    apiOrigin: `${protocol}://${configuration.hostname}:${apiPort}`,
+    configurationOrigin: `${configurationProtocol}://${configuration.hostname}:${configurationPort}`,
+    // eslint-disable-next-line global-require
+    fetch: configuration.fetch || require('isomorphic-fetch'),
   }
 
   return {
-    emit: params => emit(gatewayConfig, params),
-    invoke: params => invoke(gatewayConfig, params),
-    configure: params => configure(gatewayConfig, params),
-    resetConfiguration: params => resetConfiguration(gatewayConfig, params),
-    addFunction: params => addFunction(gatewayConfig, params),
-    deleteFunction: params => deleteFunction(gatewayConfig, params),
-    listFunctions: params => listFunctions(gatewayConfig, params),
-    addSubscription: params => addSubscription(gatewayConfig, params),
-    deleteSubscription: params => deleteSubscription(gatewayConfig, params),
-    listSubscriptions: params => listSubscriptions(gatewayConfig, params),
+    emit: params => emit(config, params),
+    invoke: params => invoke(config, params),
+    configure: params => configure(config, params),
+    resetConfiguration: params => resetConfiguration(config, params),
+    addFunction: params => addFunction(config, params),
+    deleteFunction: params => deleteFunction(config, params),
+    listFunctions: params => listFunctions(config, params),
+    addSubscription: params => addSubscription(config, params),
+    deleteSubscription: params => deleteSubscription(config, params),
+    listSubscriptions: params => listSubscriptions(config, params),
   }
 }
 
