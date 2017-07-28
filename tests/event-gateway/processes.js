@@ -10,7 +10,7 @@ const rimraf = require('rimraf')
 // eslint-disable-next-line no-undef
 jasmine.DEFAULT_TIMEOUT_INTERVAL = 4000
 
-const eventGatewayPath = path.join(__dirname, 'darwin_amd64', 'event-gateway')
+const eventGatewayPath = path.join(__dirname, `${process.platform}_amd64`, 'event-gateway')
 const processStore = {}
 
 module.exports = {
