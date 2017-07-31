@@ -10,7 +10,7 @@ const resetConfiguration = require('./lib/resetConfiguration')
 const emit = require('./lib/emit')
 const invoke = require('./lib/invoke')
 
-const createEventGatewayClient = configuration => {
+const eventGateway = configuration => {
   if (
     R.isNil(configuration) ||
     typeof configuration !== 'object' ||
@@ -18,7 +18,7 @@ const createEventGatewayClient = configuration => {
     typeof configuration.hostname !== 'string'
   ) {
     throw new Error(
-      "Please provide an object with the property 'hostname' to createEventGatewayClient"
+      "Please provide an object with the property 'hostname' to eventGateway"
     )
   }
 
@@ -49,6 +49,6 @@ const createEventGatewayClient = configuration => {
 }
 
 module.exports = {
-  createEventGatewayClient,
+  eventGateway,
   // TODO implement and export handler
 }

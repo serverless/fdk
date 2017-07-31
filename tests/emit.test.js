@@ -31,7 +31,7 @@ beforeAll(() =>
       // TODO promisify listen
       server.listen(serverPort)
       eventGatewayProcessId = processInfo.id
-      eventGateway = fdk.createEventGatewayClient({
+      eventGateway = fdk.eventGateway({
         hostname: 'localhost',
         port: 4014,
         protocol: 'http',

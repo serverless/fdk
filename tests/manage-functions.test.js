@@ -22,7 +22,7 @@ beforeAll(() =>
     })
     .then(processInfo => {
       eventGatewayProcessId = processInfo.id
-      eventGateway = fdk.createEventGatewayClient({
+      eventGateway = fdk.eventGateway({
         hostname: 'localhost',
         configurationProtocol: 'http',
         configurationPort: processInfo.configPort,
