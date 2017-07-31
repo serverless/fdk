@@ -2,27 +2,35 @@ const fdk = require('../index')
 const eventGatewayProcesses = require('./event-gateway/processes')
 const http = require('http')
 
-const serverPort = 3335
+const requests = []
+const serverPort = 3336
 const server = http.createServer((request, response) => {
+  requests.push(request)
   response.writeHead(200, { 'Content-Type': 'application/json' })
   response.end(JSON.stringify({ message: 'success' }))
 })
 
 const functionConfig = {
-  functionId: 'test-invoke',
+  functionId: 'test-emit',
   provider: {
     type: 'http',
     url: `http://localhost:${serverPort}/test/path`,
   },
 }
+const subscription = {
+  functionId: 'test-emit',
+  event: 'pageVisited',
+  subscriptionId: 'pageVisited-test-emit',
+}
+const subscriptionConfig = { functionId: 'test-emit', event: 'pageVisited' }
 let eventGateway
 let eventGatewayProcessId
 
 beforeAll(() =>
   eventGatewayProcesses
     .spawn({
-      configPort: 4009,
-      apiPort: 4010,
+      configPort: 4013,
+      apiPort: 4014,
     })
     .then(processInfo => {
       // TODO promisify listen
@@ -30,8 +38,7 @@ beforeAll(() =>
       eventGatewayProcessId = processInfo.id
       eventGateway = fdk.createEventGatewayClient({
         hostname: 'localhost',
-        port: 4010,
-        protocol: 'http',
+        port: 4014,
         configurationProtocol: 'http',
         configurationPort: processInfo.configPort,
       })
@@ -52,14 +59,22 @@ test('should add a function to the gateway', () => {
   })
 })
 
-test.skip('should invoke the function', () => {
+test('should add a subscription to the gateway', () => {
+  expect.assertions(1)
+  return eventGateway.addSubscription(subscriptionConfig).then(response => {
+    expect(response).toEqual(subscription)
+  })
+})
+
+test.skip('should invoke the subscribed function when emitting an event', () => {
   expect.assertions(1)
   return eventGateway
-    .invoke({
-      functionId: 'test-invoke',
-      data: { name: 'Austen' },
+    .emit({
+      event: 'pageVisited',
+      data: JSON.stringify({ userId: '1234' }),
     })
     .then(response => {
-      expect(response).toEqual({ functions: [functionConfig] })
+      expect(requests).toHaveLength(1)
+      expect(response).toEqual({ success: true })
     })
 })
