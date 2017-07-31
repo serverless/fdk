@@ -52,14 +52,18 @@ test('should add a function to the gateway', () => {
   })
 })
 
-test.skip('should invoke the function', () => {
-  expect.assertions(1)
+test('should invoke the function', () => {
+  expect.assertions(2)
   return eventGateway
     .invoke({
       functionId: 'test-invoke',
       data: { name: 'Austen' },
     })
     .then(response => {
-      expect(response).toEqual({ functions: [functionConfig] })
+      expect(response.status).toEqual(200)
+      return response.json()
+    })
+    .then(data => {
+      expect(data).toEqual({ message: 'success' })
     })
 })
