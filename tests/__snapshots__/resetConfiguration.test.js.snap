@@ -1,0 +1,35 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`should created multiple functions and subscriptions with configure 1`] = `
+Object {
+  "functions": Array [
+    Object {
+      "functionId": "myFunctionThree",
+      "provider": Object {
+        "arn": "https://xxxxxxxxxx.execute-api.us-east-1.amazonaws.com/dev/test",
+        "region": "us-east-1",
+        "type": "awslambda",
+      },
+    },
+    Object {
+      "functionId": "myFunctionFour",
+      "provider": Object {
+        "type": "http",
+        "url": "http://www.example.com",
+      },
+    },
+  ],
+  "subscriptions": Array [
+    Object {
+      "event": "pageVisited",
+      "functionId": "myFunctionThree",
+      "subscriptionId": "pageVisited-myFunctionThree",
+    },
+    Object {
+      "event": "userCreated",
+      "functionId": "myFunctionThree",
+      "subscriptionId": "userCreated-myFunctionThree",
+    },
+  ],
+}
+`;
