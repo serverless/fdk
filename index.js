@@ -1,16 +1,16 @@
 const R = require('ramda')
-const addFunction = require('./lib/addFunction')
+const registerFunction = require('./lib/registerFunction')
 const deleteFunction = require('./lib/deleteFunction')
 const listFunctions = require('./lib/listFunctions')
-const addSubscription = require('./lib/addSubscription')
-const deleteSubscription = require('./lib/deleteSubscription')
+const subscribe = require('./lib/subscribe')
+const unsubscribe = require('./lib/unsubscribe')
 const listSubscriptions = require('./lib/listSubscriptions')
 const configure = require('./lib/configure')
 const resetConfiguration = require('./lib/resetConfiguration')
 const emit = require('./lib/emit')
 const invoke = require('./lib/invoke')
 
-const createEventGatewayClient = configuration => {
+const eventGateway = configuration => {
   if (
     R.isNil(configuration) ||
     typeof configuration !== 'object' ||
@@ -18,7 +18,7 @@ const createEventGatewayClient = configuration => {
     typeof configuration.hostname !== 'string'
   ) {
     throw new Error(
-      "Please provide an object with the property 'hostname' to createEventGatewayClient"
+      "Please provide an object with the property 'hostname' to eventGateway"
     )
   }
 
@@ -39,16 +39,16 @@ const createEventGatewayClient = configuration => {
     invoke: params => invoke(config, params),
     configure: params => configure(config, params),
     resetConfiguration: params => resetConfiguration(config, params),
-    addFunction: params => addFunction(config, params),
+    registerFunction: params => registerFunction(config, params),
     deleteFunction: params => deleteFunction(config, params),
     listFunctions: params => listFunctions(config, params),
-    addSubscription: params => addSubscription(config, params),
-    deleteSubscription: params => deleteSubscription(config, params),
+    subscribe: params => subscribe(config, params),
+    unsubscribe: params => unsubscribe(config, params),
     listSubscriptions: params => listSubscriptions(config, params),
   }
 }
 
 module.exports = {
-  createEventGatewayClient,
+  eventGateway,
   // TODO implement and export handler
 }

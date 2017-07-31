@@ -14,21 +14,12 @@ npm install @serverless/fdk
 
 ```js
 const fdk = require('fdk');
-const gateway = fdk.createEventGatewayClient({
+const eventGateway = fdk.eventGateway({
   hostname: 'localhost',
 })
 ```
 
-ES2015+
-
-```js
-import { createEventGatewayClient } from 'fdk';
-const gateway = createEventGatewayClient({
-  hostname: 'localhost',
-})
-```
-
-Optional Properties for `createEventGatewayClient`
+Optional Properties for `eventGateway`
 
 ```js
 {
@@ -49,7 +40,7 @@ Optional Properties for `createEventGatewayClient`
 Configure accepts an object of function and subscription definitions. The idea of exposing one configuration function is to provide developers with convenient utility to configure an Event Gateway in one call rather then dealing with a chain of Promise based calls. Nevertheless in addition we expose a wrapper function for each low-level API call to the Event Gateway
 
 ```js
-gateway.configure({
+eventGateway.configure({
   // list of all the functions that should be registered
   functions: [
     {
@@ -92,7 +83,7 @@ Returns a promise which contains all the same list of functions and subscription
 ES5
 
 ```js
-gateway.configure({ config })
+eventGateway.configure({ config })
   .then((response) => {
     console.log(response)
     // {
@@ -111,7 +102,7 @@ gateway.configure({ config })
 ES2015
 
 ```js
-const response = await gateway.configure({ config })
+const response = await eventGateway.configure({ config })
 console.log(response)
 ```
 
@@ -134,7 +125,7 @@ In the initial implementation the returned Promise is rejected, but there will b
 Reset removes all the existing subscriptions and functions.
 
 ```js
-gateway.resetConfiguration()
+eventGateway.resetConfiguration()
 ```
 
 ### Internal Steps
@@ -147,7 +138,7 @@ gateway.resetConfiguration()
 ## Invoke a Function
 
 ```js
-gateway.invoke({
+eventGateway.invoke({
   functionId: "createUser",
   data: JSON.stringify({ name: "Austen" }),
 })
@@ -158,7 +149,7 @@ Returns a Promise with the response.
 ## Emit an Event
 
 ```js
-gateway.emit({
+eventGateway.emit({
   event: "userCreated",
   data: JSON.stringify({ name: "Austen" }),
 })
@@ -184,8 +175,9 @@ Middlewares will be implemented at a later stage.
 ## Further Event Gateway Functions
 
 ```js
-gateway.registerFunction({
-  functionId: "hello-world"
+// Returns a function
+eventGateway.registerFunction({
+  functionId: "sendEmail"
   provider: {
     type: "awslambda"
     arn: "xxx",
@@ -193,21 +185,25 @@ gateway.registerFunction({
   }
 })
 
-gateway.removeFunction({ functionId: "hello-world" })
+// Returns undefined
+eventGateway.deleteFunction({ functionId: "sendEmail" })
 
-gateway.listFunctions()
+// Returns an Array of functions
+eventGateway.listFunctions()
 
-gateway.createSubscription({
+// Returns a subscription: { subscriptionId, event, functionId}
+eventGateway.subscribe({
   event: "user.created",
   functionId: "sendEmail"
 })
 
-gateway.removeSubscription({
-  event: "user.created",
-  functionId: "sendEmail"
+// Returns undefined
+eventGateway.unsubscribe({
+  subscriptionId: "user.created-sendEmail"
 })
 
-gateway.listSubscriptions()
+// Returns an Array of subscriptions
+eventGateway.listSubscriptions()
 ```
 
 ## Development
