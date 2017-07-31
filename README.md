@@ -184,6 +184,7 @@ Middlewares will be implemented at a later stage.
 ## Further Event Gateway Functions
 
 ```js
+// Returns a function
 gateway.registerFunction({
   functionId: "hello-world"
   provider: {
@@ -193,20 +194,24 @@ gateway.registerFunction({
   }
 })
 
+// Returns undefined
 gateway.removeFunction({ functionId: "hello-world" })
 
+// Returns an Array of functions
 gateway.listFunctions()
 
-gateway.createSubscription({
+// Returns a subscription: { subscriptionId, event, functionId}
+gateway.subscribe({
   event: "user.created",
   functionId: "sendEmail"
 })
 
-gateway.removeSubscription({
-  event: "user.created",
-  functionId: "sendEmail"
+// Returns undefined
+gateway.unsubscribe({
+  subscriptionId: "user.created-sendEmail"
 })
 
+// Returns an Array of subscriptions
 gateway.listSubscriptions()
 ```
 

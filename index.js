@@ -2,8 +2,8 @@ const R = require('ramda')
 const addFunction = require('./lib/addFunction')
 const deleteFunction = require('./lib/deleteFunction')
 const listFunctions = require('./lib/listFunctions')
-const addSubscription = require('./lib/addSubscription')
-const deleteSubscription = require('./lib/deleteSubscription')
+const subscribe = require('./lib/subscribe')
+const unsubscribe = require('./lib/unsubscribe')
 const listSubscriptions = require('./lib/listSubscriptions')
 const configure = require('./lib/configure')
 const resetConfiguration = require('./lib/resetConfiguration')
@@ -42,8 +42,8 @@ const createEventGatewayClient = configuration => {
     addFunction: params => addFunction(config, params),
     deleteFunction: params => deleteFunction(config, params),
     listFunctions: params => listFunctions(config, params),
-    addSubscription: params => addSubscription(config, params),
-    deleteSubscription: params => deleteSubscription(config, params),
+    subscribe: params => subscribe(config, params),
+    unsubscribe: params => unsubscribe(config, params),
     listSubscriptions: params => listSubscriptions(config, params),
   }
 }

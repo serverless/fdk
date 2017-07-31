@@ -57,7 +57,7 @@ test('should add a function to the gateway', () => {
 
 test('should add a subscription to the gateway', () => {
   expect.assertions(1)
-  return eventGateway.addSubscription(subscriptionConfig).then(response => {
+  return eventGateway.subscribe(subscriptionConfig).then(response => {
     expect(response).toMatchSnapshot()
   })
 })

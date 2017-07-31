@@ -45,7 +45,7 @@ test('should add a function to the gateway', () => {
 
 test('should add a subscription to the gateway', () => {
   expect.assertions(1)
-  return eventGateway.addSubscription(subscriptionConfig).then(response => {
+  return eventGateway.subscribe(subscriptionConfig).then(response => {
     expect(response).toMatchSnapshot()
   })
 })
@@ -60,7 +60,7 @@ test('should list the added subscriptions', () => {
 test('should remove the added subscription', () => {
   expect.assertions(1)
   return eventGateway
-    .deleteSubscription({ subscriptionId: 'pageVisited-subscription-test-function' })
+    .unsubscribe({ subscriptionId: 'pageVisited-subscription-test-function' })
     .then(response => {
       expect(response).toBeUndefined()
     })
