@@ -1,24 +1,32 @@
 const fdk = require('../index')
 const eventGatewayProcesses = require('./event-gateway/processes')
+const http = require('http')
+
+const serverPort = 3335
+const server = http.createServer((request, response) => {
+  response.writeHead(200, { 'Content-Type': 'application/json' })
+  response.end(JSON.stringify({ message: 'success' }))
+})
 
 const functionConfig = {
   functionId: 'test-invoke',
   provider: {
     type: 'http',
-    url: 'http://localhost:3334/test/path',
+    url: `http://localhost:${serverPort}/test/path`,
   },
 }
 let eventGateway
 let eventGatewayProcessId
 
 beforeAll(() =>
-  // TODO spin up server for the function endpoint
   eventGatewayProcesses
     .spawn({
       configPort: 4009,
       apiPort: 4010,
     })
     .then(processInfo => {
+      // TODO promisify listen
+      server.listen(serverPort)
       eventGatewayProcessId = processInfo.id
       eventGateway = fdk.createEventGatewayClient({
         hostname: 'localhost',
@@ -29,8 +37,11 @@ beforeAll(() =>
     })
 )
 
-afterAll(() => {
+afterAll(done => {
   eventGatewayProcesses.shutDown(eventGatewayProcessId)
+  server.close(() => {
+    done()
+  })
 })
 
 test('should add a function to the gateway', () => {
