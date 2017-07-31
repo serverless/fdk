@@ -15,7 +15,7 @@ npm install @serverless/fdk
 ```js
 const fdk = require('fdk');
 const eventGateway = fdk.eventGateway({
-  hostname: 'localhost',
+  url: 'http://localhost',
 })
 ```
 
@@ -23,14 +23,10 @@ Optional Properties for `eventGateway`
 
 ```js
 {
-  // defaults to the default Gateway configuration port
-  port: '8080',
-  // by default 'https' but we also support 'http'
-  protocol: 'http'
-  // defaults to the default Gateway configuration port
-  configurationPort: '3001'
-  // optional property allowing the developer to provide their own http lib
-  // ideal for mocking or to cover edge cases like passing in special headers
+  // defaults to the provide URL + the default configuration port for the Event Gateway 4001
+  configurationUrl: 'http://localhost:4001'
+  // optional property allowing the developer to provide their own http lib ideal for mocking
+  // or to cover edge cases like passing in special headers
   fetchClient: fetch
 }
 ```

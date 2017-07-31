@@ -32,11 +32,8 @@ beforeAll(() =>
       server.listen(serverPort)
       eventGatewayProcessId = processInfo.id
       eventGateway = fdk.eventGateway({
-        hostname: 'localhost',
-        port: 4014,
-        protocol: 'http',
-        configurationProtocol: 'http',
-        configurationPort: processInfo.configPort,
+        url: `http://localhost:${processInfo.apiPort}`,
+        configurationUrl: `http://localhost:${processInfo.configPort}`,
       })
     })
 )
