@@ -14,22 +14,16 @@ const eventGateway = configuration => {
   if (
     R.isNil(configuration) ||
     typeof configuration !== 'object' ||
-    R.isNil(configuration.hostname) ||
-    typeof configuration.hostname !== 'string'
+    R.isNil(configuration.url) ||
+    typeof configuration.url !== 'string'
   ) {
-    throw new Error(
-      "Please provide an object with the property 'hostname' to eventGateway"
-    )
+    throw new Error("Please provide an object with the property 'url' to eventGateway")
   }
 
-  const protocol = configuration.protocol || 'https'
-  const configurationProtocol = configuration.configurationProtocol || 'https'
-  const apiPort = configuration.port || 4000
-  const configurationPort = configuration.configurationPort || 4001
-
   const config = {
-    apiOrigin: `${protocol}://${configuration.hostname}:${apiPort}`,
-    configurationOrigin: `${configurationProtocol}://${configuration.hostname}:${configurationPort}`,
+    apiUrl: configuration.url,
+    // TODO improve by dedecting if the url contains a port and replace it
+    configurationUrl: configuration.configurationUrl || `${configuration.url}:${4001}`,
     // eslint-disable-next-line global-require
     fetch: configuration.fetch || require('isomorphic-fetch'),
   }
