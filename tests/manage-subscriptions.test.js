@@ -9,13 +9,7 @@ const functionConfig = {
     region: 'us-east-1',
   },
 }
-
 const subscriptionConfig = { functionId: 'subscription-test-function', event: 'pageVisited' }
-const subscription = {
-  functionId: 'subscription-test-function',
-  event: 'pageVisited',
-  subscriptionId: 'pageVisited-subscription-test-function',
-}
 
 let eventGateway
 let eventGatewayProcessId
@@ -52,14 +46,14 @@ test('should add a function to the gateway', () => {
 test('should add a subscription to the gateway', () => {
   expect.assertions(1)
   return eventGateway.addSubscription(subscriptionConfig).then(response => {
-    expect(response).toEqual(subscription)
+    expect(response).toMatchSnapshot()
   })
 })
 
 test('should list the added subscriptions', () => {
   expect.assertions(1)
   return eventGateway.listSubscriptions().then(response => {
-    expect(response).toEqual({ subscriptions: [subscription] })
+    expect(response).toMatchSnapshot()
   })
 })
 
