@@ -39,6 +39,7 @@ beforeAll(() =>
       eventGateway = fdk.createEventGatewayClient({
         hostname: 'localhost',
         port: 4014,
+        protocol: 'http',
         configurationProtocol: 'http',
         configurationPort: processInfo.configPort,
       })
@@ -66,8 +67,8 @@ test('should add a subscription to the gateway', () => {
   })
 })
 
-test.skip('should invoke the subscribed function when emitting an event', () => {
-  expect.assertions(1)
+test('should invoke the subscribed function when emitting an event', () => {
+  expect.assertions(2)
   return eventGateway
     .emit({
       event: 'pageVisited',
@@ -75,6 +76,6 @@ test.skip('should invoke the subscribed function when emitting an event', () => 
     })
     .then(response => {
       expect(requests).toHaveLength(1)
-      expect(response).toEqual({ success: true })
+      expect(response.status).toEqual(202)
     })
 })
