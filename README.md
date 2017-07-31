@@ -186,7 +186,7 @@ Middlewares will be implemented at a later stage.
 ```js
 // Returns a function
 gateway.registerFunction({
-  functionId: "hello-world"
+  functionId: "sendEmail"
   provider: {
     type: "awslambda"
     arn: "xxx",
@@ -195,7 +195,7 @@ gateway.registerFunction({
 })
 
 // Returns undefined
-gateway.removeFunction({ functionId: "hello-world" })
+gateway.deleteFunction({ functionId: "sendEmail" })
 
 // Returns an Array of functions
 gateway.listFunctions()

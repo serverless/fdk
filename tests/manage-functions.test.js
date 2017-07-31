@@ -43,7 +43,7 @@ test('should return an empty list for a new gateway', () => {
 
 test('should add a function to the gateway', () => {
   expect.assertions(1)
-  return eventGateway.addFunction(functionConfig).then(response => {
+  return eventGateway.registerFunction(functionConfig).then(response => {
     expect(response).toEqual(functionConfig)
   })
 })

@@ -1,5 +1,5 @@
 const R = require('ramda')
-const addFunction = require('./lib/addFunction')
+const registerFunction = require('./lib/registerFunction')
 const deleteFunction = require('./lib/deleteFunction')
 const listFunctions = require('./lib/listFunctions')
 const subscribe = require('./lib/subscribe')
@@ -39,7 +39,7 @@ const createEventGatewayClient = configuration => {
     invoke: params => invoke(config, params),
     configure: params => configure(config, params),
     resetConfiguration: params => resetConfiguration(config, params),
-    addFunction: params => addFunction(config, params),
+    registerFunction: params => registerFunction(config, params),
     deleteFunction: params => deleteFunction(config, params),
     listFunctions: params => listFunctions(config, params),
     subscribe: params => subscribe(config, params),
