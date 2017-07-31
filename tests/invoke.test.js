@@ -31,6 +31,7 @@ beforeAll(() =>
       eventGateway = fdk.createEventGatewayClient({
         hostname: 'localhost',
         port: 4010,
+        protocol: 'http',
         configurationProtocol: 'http',
         configurationPort: processInfo.configPort,
       })
@@ -53,7 +54,12 @@ test('should add a function to the gateway', () => {
 
 test('should invoke the function', () => {
   expect.assertions(1)
-  return eventGateway.invoke().then(response => {
-    expect(response).toEqual({ functions: [functionConfig] })
-  })
+  return eventGateway
+    .invoke({
+      functionId: 'test-invoke',
+      data: JSON.stringify({ name: 'Austen' }),
+    })
+    .then(response => {
+      expect(response).toEqual({ functions: [functionConfig] })
+    })
 })
