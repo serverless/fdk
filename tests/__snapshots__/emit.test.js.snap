@@ -1,0 +1,9 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`should add a subscription to the gateway 1`] = `
+Object {
+  "event": "pageVisited",
+  "functionId": "test-emit",
+  "subscriptionId": "pageVisited-test-emit",
+}
+`;

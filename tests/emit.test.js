@@ -17,11 +17,6 @@ const functionConfig = {
     url: `http://localhost:${serverPort}/test/path`,
   },
 }
-const subscription = {
-  functionId: 'test-emit',
-  event: 'pageVisited',
-  subscriptionId: 'pageVisited-test-emit',
-}
 const subscriptionConfig = { functionId: 'test-emit', event: 'pageVisited' }
 let eventGateway
 let eventGatewayProcessId
@@ -63,7 +58,7 @@ test('should add a function to the gateway', () => {
 test('should add a subscription to the gateway', () => {
   expect.assertions(1)
   return eventGateway.addSubscription(subscriptionConfig).then(response => {
-    expect(response).toEqual(subscription)
+    expect(response).toMatchSnapshot()
   })
 })
 
