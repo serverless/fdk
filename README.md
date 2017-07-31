@@ -33,7 +33,7 @@ Optional Properties for `createEventGatewayClient`
 ```js
 {
   // defaults to the default Gateway configuration port
-  port: '8080', 
+  port: '8080',
   // by default 'https' but we also support 'http'
   protocol: 'http'
   // defaults to the default Gateway configuration port
@@ -148,7 +148,7 @@ gateway.resetConfiguration()
 
 ```js
 gateway.invoke({
-  function: "createUser",
+  functionId: "createUser",
   data: JSON.stringify({ name: "Austen" }),
 })
 ```
