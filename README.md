@@ -1,8 +1,6 @@
 # Function Development Kit
 
-Node.js library to improve developer experience developing Serverless applications.
-
-It contains a client to configure and interact with the [Event Gateway](https://github.com/serverless/event-gateway). In the near future we plan to add a wrapper for function handlers to improve the developer experience.
+Node.js library to improve developer experience developing Serverless applications. It contains a client to configure and interact with the [Event Gateway](https://github.com/serverless/event-gateway). 
 
 [![Build Status](https://travis-ci.org/serverless/fdk.svg?branch=master)](https://travis-ci.org/serverless/fdk)
 
