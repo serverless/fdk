@@ -2,7 +2,7 @@
 
 Node.js library to improve developer experience developing Serverless applications.
 
-It contains a client to configure and interact with the [Event Gateway](https://github.com/serverless/event-gateway). 
+It contains a client to configure and interact with the [Event Gateway](https://github.com/serverless/event-gateway).
 
 [![Build Status](https://travis-ci.org/serverless/fdk.svg?branch=master)](https://travis-ci.org/serverless/fdk)
 
@@ -25,10 +25,9 @@ Optional Properties for `eventGateway`
 
 ```js
 {
-  // defaults to the provide URL + the default configuration port for the Event Gateway 4001
+  // defaults to the provide URL + default config port 4001
   configurationUrl: 'http://localhost:4001'
-  // optional property allowing the developer to provide their own http lib ideal for mocking
-  // or to cover edge cases like passing in special headers
+  // optional property to provide their own http lib
   fetchClient: fetch
 }
 ```
