@@ -1,3 +1,13 @@
+# Development
+
+```
+npm install
+```
+
+```js
+npm run test
+```
+
 # Design Decision
 
 The purpose of this section is to introduce contributors to the philosophy and thinking behind the architecture and API design of this library.
