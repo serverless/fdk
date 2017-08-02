@@ -6,7 +6,7 @@ const uuidv1 = require('uuid/v1')
 const rimraf = require('rimraf')
 
 // eslint-disable-next-line no-undef
-jasmine.DEFAULT_TIMEOUT_INTERVAL = 4000
+jasmine.DEFAULT_TIMEOUT_INTERVAL = 5000
 
 const eventGatewayPath = path.join(__dirname, `${process.platform}_amd64`, 'event-gateway')
 const processStore = {}
@@ -33,7 +33,7 @@ module.exports = {
             configPort: ports.configPort,
             apiPort: ports.apiPort,
           }),
-        2000
+        3000
       )
     }),
   shutDown: id => {
