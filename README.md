@@ -15,7 +15,7 @@ npm install @serverless/fdk
 ## Create an Event Gateway Client
 
 ```js
-const fdk = require('fdk');
+const fdk = require('@serverless/fdk');
 const eventGateway = fdk.eventGateway({
   url: 'http://localhost',
 })
