@@ -18,19 +18,22 @@ const functionConfig = {
 let eventGateway
 let eventGatewayProcessId
 
-beforeAll(() =>
+beforeAll(done =>
   eventGatewayProcesses
     .spawn({
       configPort: 4009,
       apiPort: 4010,
     })
     .then(processInfo => {
-      // TODO promisify listen
-      server.listen(serverPort)
       eventGatewayProcessId = processInfo.id
       eventGateway = fdk.eventGateway({
         url: `http://localhost:${processInfo.apiPort}`,
         configurationUrl: `http://localhost:${processInfo.configPort}`,
+      })
+      server.listen(serverPort, err => {
+        if (!err) {
+          done()
+        }
       })
     })
 )
