@@ -1,5 +1,6 @@
 const urlUtils = require('../lib/urlUtils')
 
+
 test('should add the port 4001 to a url without a port', () => {
   expect(urlUtils.generateConfigureUrl('http://localhost')).toEqual('http://localhost:4001/')
 })
