@@ -9,6 +9,7 @@ const configure = require('./lib/configure')
 const resetConfiguration = require('./lib/resetConfiguration')
 const emit = require('./lib/emit')
 const invoke = require('./lib/invoke')
+const urlUtils = require('./lib/urlUtils')
 
 const eventGateway = configuration => {
   if (
@@ -22,8 +23,8 @@ const eventGateway = configuration => {
 
   const config = {
     apiUrl: configuration.url,
-    // TODO improve by dedecting if the url contains a port and replace it
-    configurationUrl: configuration.configurationUrl || `${configuration.url}:${4001}`,
+    configurationUrl:
+      configuration.configurationUrl || urlUtils.generateConfigureUrl(configuration.url),
     // eslint-disable-next-line global-require
     fetch: configuration.fetch || require('isomorphic-fetch'),
   }
