@@ -67,7 +67,7 @@ test('should invoke the subscribed function when emitting an event', () => {
   return eventGateway
     .emit({
       event: 'pageVisited',
-      data: JSON.stringify({ userId: '1234' }),
+      data: { userId: '1234' },
     })
     .then(response => {
       expect(requests).toHaveLength(1)
