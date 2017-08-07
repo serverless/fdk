@@ -37,11 +37,23 @@ Optional Properties for `eventGateway`
 ```js
 eventGateway.invoke({
   functionId: "createUser",
-  data: JSON.stringify({ name: "Max" }),
+  data: { name: "Max" },
 })
 ```
 
 Returns a Promise with the response.
+
+The value of data is converted using `JSON.stringify` by default since the default dataType is `application/json`. This is not happening and the value is passed as it is when the property `dataType` is provided.
+
+### Invoke a Function with a Custom Data Type
+
+```js
+eventGateway.invoke({
+  functionId: "createUser",
+  data: "Max",
+  dataType: "text/plain",
+})
+```
 
 ## Emit an Event
 
@@ -62,7 +74,7 @@ The value of data is converted using `JSON.stringify` by default since the defau
 eventGateway.emit({
   event: "userCreated",
   data: "This is a string message.",
-  dataType: "text/html",
+  dataType: "text/plain",
 })
 ```
 
