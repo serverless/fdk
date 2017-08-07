@@ -67,3 +67,20 @@ test('should invoke the function', () => {
       expect(data).toEqual({ message: 'success' })
     })
 })
+
+test('should invoke the function with dataType text/plain', () => {
+  expect.assertions(2)
+  return eventGateway
+    .invoke({
+      functionId: 'test-invoke',
+      data: 'test message',
+      dataType: 'text/plain',
+    })
+    .then(response => {
+      expect(response.status).toEqual(200)
+      return response.json()
+    })
+    .then(data => {
+      expect(data).toEqual({ message: 'success' })
+    })
+})
