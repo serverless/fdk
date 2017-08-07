@@ -84,3 +84,20 @@ test('should invoke the function with dataType text/plain', () => {
       expect(data).toEqual({ message: 'success' })
     })
 })
+
+test('should invoke the function with dataType application/octet-stream', () => {
+  expect.assertions(2)
+  return eventGateway
+    .invoke({
+      functionId: 'test-invoke',
+      data: Buffer.from([0x62, 0x75, 0x66, 0x66, 0x65, 0x72]),
+      dataType: 'application/octet-stream',
+    })
+    .then(response => {
+      expect(response.status).toEqual(200)
+      return response.json()
+    })
+    .then(data => {
+      expect(data).toEqual({ message: 'success' })
+    })
+})
