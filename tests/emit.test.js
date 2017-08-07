@@ -67,10 +67,24 @@ test('should invoke the subscribed function when emitting an event', () => {
   return eventGateway
     .emit({
       event: 'pageVisited',
-      data: JSON.stringify({ userId: '1234' }),
+      data: { userId: '1234' },
     })
     .then(response => {
       expect(requests).toHaveLength(1)
+      expect(response.status).toEqual(202)
+    })
+})
+
+test('should invoke the subscribed function with an event with dataType text/plain', () => {
+  expect.assertions(2)
+  return eventGateway
+    .emit({
+      event: 'pageVisited',
+      data: 'This is a test text.',
+      dataType: 'text/plain',
+    })
+    .then(response => {
+      expect(requests).toHaveLength(2)
       expect(response.status).toEqual(202)
     })
 })
