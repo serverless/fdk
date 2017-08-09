@@ -10,7 +10,6 @@
     "build": "rollup -c"
   },
   "dependencies": {
-    "aws-sdk": "^2.6.14",
     "isomorphic-fetch": "^2.2.1",
     "ramda": "^0.24.1",
     "url": "^0.11.0"
