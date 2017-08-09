@@ -3,9 +3,9 @@ sudo: false
 node_js:
 - 8
 script:
-- npm run build
-- npm test
 - npm run lint
+- npm test
+- npm run build
 deploy:
   provider: npm
   email: services@serverless.com
