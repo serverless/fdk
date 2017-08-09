@@ -3,7 +3,7 @@ sudo: false
 node_js:
 - 8
 script:
-- npm build
+- npm run build
 - npm test
 - npm run lint
 deploy:
