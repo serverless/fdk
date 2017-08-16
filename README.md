@@ -1,4 +1,4 @@
-# Function Development Kit
+# Serverless Development Kit (aka FDK)
 
 Node.js library to improve developer experience developing Serverless applications.
 
