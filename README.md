@@ -1,4 +1,4 @@
-# Function Development Kit
+# Function Development Kit (aka FDK)
 
 Node.js library to improve developer experience developing Serverless applications.
 
@@ -6,11 +6,19 @@ It contains a client to configure and interact with the [Event Gateway](https://
 
 [![Build Status](https://travis-ci.org/serverless/fdk.svg?branch=master)](https://travis-ci.org/serverless/fdk)
 
-## Install
+## Install (Node)
 
 ```bash
 npm install @serverless/fdk
 ```
+
+## Install (Browser)
+
+```html
+<script type="text/javascript" src="https://unpkg.com/@serverless/fdk@latest/dist/fdk.min.js"></script>
+```
+
+The FDK then will be attached to window e.g. and you can access it via `window.fdk`
 
 ## Create an Event Gateway Client
 

@@ -15,6 +15,7 @@
     "url-parse": "^1.1.9"
   },
   "devDependencies": {
+    "babel-preset-env": "^1.6.0",
     "eslint": "^3.3.1",
     "eslint-config-airbnb-base": "^5.0.3",
     "eslint-plugin-import": "^1.8.1",
@@ -22,6 +23,7 @@
     "jest": "^20.0.4",
     "rimraf": "^2.6.1",
     "rollup": "^0.45.2",
+    "rollup-plugin-babel": "^3.0.2",
     "rollup-plugin-commonjs": "^8.1.0",
     "rollup-plugin-json": "^2.3.0",
     "rollup-plugin-node-builtins": "^2.1.2",
