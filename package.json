@@ -3,6 +3,8 @@
   "version": "0.3.5",
   "license": "MIT",
   "repository": "https://github.com/serverless/fdk",
+  "browser": "index-browser.js",
+  "main": "index-node.js",
   "scripts": {
     "lint": "eslint .",
     "test": "jest --maxWorkers=1",
@@ -12,7 +14,8 @@
   "dependencies": {
     "isomorphic-fetch": "^2.2.1",
     "ramda": "^0.24.1",
-    "url-parse": "^1.1.9"
+    "url-parse": "^1.1.9",
+    "whatwg-fetch": "^2.0.3"
   },
   "devDependencies": {
     "babel-plugin-external-helpers": "^6.22.0",
@@ -27,21 +30,14 @@
     "rollup-plugin-babel": "^3.0.2",
     "rollup-plugin-commonjs": "^8.1.0",
     "rollup-plugin-json": "^2.3.0",
-    "rollup-plugin-node-builtins": "^2.1.2",
-    "rollup-plugin-node-globals": "^1.1.0",
     "rollup-plugin-node-resolve": "^3.0.0",
     "rollup-plugin-uglify": "^2.0.1",
     "rollup-plugin-visualizer": "^0.3.1",
     "uuid": "^3.1.0"
   },
   "eslintConfig": {
-    "plugins": [
-      "node"
-    ],
-    "extends": [
-      "airbnb-base",
-      "plugin:node/recommended"
-    ],
+    "plugins": ["node"],
+    "extends": ["airbnb-base", "plugin:node/recommended"],
     "env": {
       "node": true,
       "jest": true
@@ -49,14 +45,8 @@
     "rules": {
       "strict": "off",
       "node/no-unsupported-features": "error",
-      "semi": [
-        "error",
-        "never"
-      ],
-      "arrow-parens": [
-        "error",
-        "as-needed"
-      ]
+      "semi": ["error", "never"],
+      "arrow-parens": ["error", "as-needed"]
     }
   },
   "engines": {
