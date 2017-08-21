@@ -21,6 +21,7 @@ const plugins = [
   babel({
     babelrc: false,
     presets: [['env', { modules: false }]],
+    plugins: ['external-helpers'],
   }),
   uglify(),
 ]
