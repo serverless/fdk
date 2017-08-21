@@ -13,7 +13,14 @@ const targets = [{ dest: 'dist/fdk.min.js', format: 'umd' }]
 
 const plugins = [
   json(),
-  resolve({ jsnext: true, main: true, browser: true, preferBuiltins: false }),
+  resolve({
+    jsnext: true,
+    main: true,
+    // NOTE setting browser to true makes sure only the browser relevant
+    // entry point for libraries is used e.g. isomorphic-fetch
+    browser: true,
+    preferBuiltins: false,
+  }),
   commonjs(),
   babel({
     babelrc: false,
