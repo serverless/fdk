@@ -1,6 +1,7 @@
+const http = require('http')
 const fdk = require('../lib/index')
 const eventGatewayProcesses = require('./event-gateway/processes')
-const http = require('http')
+const delay = require('./utils/delay')
 
 const requests = []
 const serverPort = 3336
@@ -69,6 +70,7 @@ test('should invoke the subscribed function when emitting an event', () => {
       event: 'pageVisited',
       data: { userId: '1234' },
     })
+    .then(delay(150))
     .then(response => {
       expect(requests).toHaveLength(1)
       expect(response.status).toEqual(202)
@@ -83,6 +85,7 @@ test('should invoke the subscribed function with an event with dataType text/pla
       data: 'This is a test text.',
       dataType: 'text/plain',
     })
+    .then(delay(150))
     .then(response => {
       expect(requests).toHaveLength(2)
       expect(response.status).toEqual(202)
