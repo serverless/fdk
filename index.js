@@ -1,4 +1,4 @@
-const R = require('ramda')
+const isNil = require('ramda/src/isNil')
 const registerFunction = require('./lib/registerFunction')
 const deleteFunction = require('./lib/deleteFunction')
 const listFunctions = require('./lib/listFunctions')
@@ -13,9 +13,9 @@ const urlUtils = require('./lib/urlUtils')
 
 const eventGateway = configuration => {
   if (
-    R.isNil(configuration) ||
+    isNil(configuration) ||
     typeof configuration !== 'object' ||
-    R.isNil(configuration.url) ||
+    isNil(configuration.url) ||
     typeof configuration.url !== 'string'
   ) {
     throw new Error("Please provide an object with the property 'url' to eventGateway")
