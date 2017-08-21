@@ -6,6 +6,7 @@ const json = require('rollup-plugin-json')
 const builtins = require('rollup-plugin-node-builtins')
 const globals = require('rollup-plugin-node-globals')
 const uglify = require('rollup-plugin-uglify')
+const visualizer = require('rollup-plugin-visualizer')
 
 // eslint-disable-next-line no-console
 console.log('Creating bundle...')
@@ -24,6 +25,7 @@ const plugins = [
     plugins: ['external-helpers'],
   }),
   uglify(),
+  visualizer(),
 ]
 
 module.exports = {
