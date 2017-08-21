@@ -1,6 +1,6 @@
 {
   "name": "@serverless/fdk",
-  "version": "0.3.5",
+  "version": "0.4.0",
   "license": "MIT",
   "repository": "https://github.com/serverless/fdk",
   "main": "lib/index.js",
