@@ -25,7 +25,7 @@ const plugins = [
 ]
 
 module.exports = {
-  entry: 'index-browser.js',
+  entry: 'lib/index.js',
   moduleName: 'fdk',
   exports: 'named',
   targets,

@@ -3,8 +3,7 @@
   "version": "0.3.5",
   "license": "MIT",
   "repository": "https://github.com/serverless/fdk",
-  "browser": "index-browser.js",
-  "main": "index-node.js",
+  "main": "lib/index.js",
   "scripts": {
     "lint": "eslint .",
     "test": "jest --maxWorkers=1",
@@ -14,8 +13,7 @@
   "dependencies": {
     "isomorphic-fetch": "^2.2.1",
     "ramda": "^0.24.1",
-    "url-parse": "^1.1.9",
-    "whatwg-fetch": "^2.0.3"
+    "url-parse": "^1.1.9"
   },
   "devDependencies": {
     "babel-plugin-external-helpers": "^6.22.0",

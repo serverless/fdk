@@ -1,4 +1,4 @@
-const fdk = require('../index-node')
+const fdk = require('../lib/index')
 const eventGatewayProcesses = require('./event-gateway/processes')
 const http = require('http')
 
