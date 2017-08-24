@@ -1,5 +1,7 @@
 # Development
 
+IMPORTANT: While the library is supposed to work with Node 6 you will need to Node 8 or higher to run the tests.
+
 ## Setup
 
 ```
@@ -16,6 +18,12 @@ Running them in watch mode
 
 ```js
 npm run test -- --watch
+```
+
+## Running the browser tests
+
+```js
+npm run test:browser
 ```
 
 # Design Decision

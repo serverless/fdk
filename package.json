@@ -7,6 +7,7 @@
   "scripts": {
     "lint": "eslint .",
     "test": "jest --maxWorkers=1",
+    "test:browser": "npm run build && jest --config=tests-browser/jest.config.json --maxWorkers=1",
     "test:watch": "jest --watch --maxWorkers=1",
     "build": "rollup -c"
   },
@@ -23,6 +24,7 @@
     "eslint-plugin-import": "^1.8.1",
     "eslint-plugin-node": "^4.0.1",
     "jest": "^20.0.4",
+    "puppeteer": "^0.9.0",
     "rimraf": "^2.6.1",
     "rollup": "^0.45.2",
     "rollup-plugin-babel": "^3.0.2",
@@ -35,13 +37,8 @@
     "uuid": "^3.1.0"
   },
   "eslintConfig": {
-    "plugins": [
-      "node"
-    ],
-    "extends": [
-      "airbnb-base",
-      "plugin:node/recommended"
-    ],
+    "plugins": ["node"],
+    "extends": ["airbnb-base", "plugin:node/recommended"],
     "env": {
       "node": true,
       "jest": true
@@ -49,14 +46,8 @@
     "rules": {
       "strict": "off",
       "node/no-unsupported-features": "error",
-      "semi": [
-        "error",
-        "never"
-      ],
-      "arrow-parens": [
-        "error",
-        "as-needed"
-      ]
+      "semi": ["error", "never"],
+      "arrow-parens": ["error", "as-needed"]
     }
   },
   "engines": {
