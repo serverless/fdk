@@ -17,13 +17,6 @@ const config = {
         type: 'http',
       },
     },
-    {
-      functionId: 'myFunctionThree',
-      provider: {
-        type: 'awslambda',
-        url: 'http://www.example.com',
-      },
-    },
   ],
   subscriptions: [{ functionId: 'myFunctionOne', event: 'pageVisited' }],
 }

@@ -14,7 +14,6 @@ const config = {
   ],
   subscriptions: [
     { functionId: 'myFunctionOne', event: 'pageVisited' },
-    { functionId: 'myFunctionTwo', event: 'userCreated' },
     { functionId: 'myFunctionTwo', event: 'pageVisited' },
   ],
 }
