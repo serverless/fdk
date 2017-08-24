@@ -7,7 +7,7 @@
   "scripts": {
     "lint": "eslint .",
     "test": "jest --maxWorkers=1",
-    "test:browser": "npm run build && node tests-browser/browser-test.js",
+    "test:browser": "npm run build && jest --config=tests-browser/jest.config.json --maxWorkers=1",
     "test:watch": "jest --watch --maxWorkers=1",
     "build": "rollup -c"
   },

@@ -20,6 +20,12 @@ Running them in watch mode
 npm run test -- --watch
 ```
 
+## Running the browser tests
+
+```js
+npm run test:browser
+```
+
 # Design Decision
 
 The purpose of this section is to introduce contributors to the philosophy and thinking behind the architecture and API design of this library.
