@@ -5,7 +5,7 @@ const puppeteer = require('puppeteer')
 const path = require('path')
 
 const command = `
-const eventGateway = jhkhkhk.eventGateway({
+const eventGateway = fdk.eventGateway({
   url: 'http://localhost',
 })
 `
