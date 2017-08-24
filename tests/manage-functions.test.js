@@ -67,3 +67,10 @@ test('should remove the added function', () => {
     expect(response).toBeUndefined()
   })
 })
+
+test('should fail to remove a none-existing function', () => {
+  expect.assertions(1)
+  return eventGateway.deleteFunction({ functionId: 'missing-func' }).catch(err => {
+    expect(err).toMatchSnapshot()
+  })
+})
