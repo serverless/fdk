@@ -101,3 +101,15 @@ test('should invoke the function with dataType application/octet-stream', () => 
       expect(data).toEqual({ message: 'success' })
     })
 })
+
+test('should throw an error if the function does not exist', () => {
+  expect.assertions(1)
+  return eventGateway
+    .invoke({
+      functionId: 'not-existing-function',
+      data: { name: 'Austen' },
+    })
+    .catch(err => {
+      expect(err).toMatchSnapshot()
+    })
+})
