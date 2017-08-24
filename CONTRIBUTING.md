@@ -1,11 +1,21 @@
 # Development
 
+## Setup
+
 ```
 npm install
 ```
 
+## Running the tests
+
 ```js
 npm run test
+```
+
+Running them in watch mode
+
+```js
+npm run test -- --watch
 ```
 
 # Design Decision

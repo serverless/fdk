@@ -8,6 +8,10 @@ Object {
 }
 `;
 
+exports[`should fail to a add a subscription to a none existing function 1`] = `[Error: Failed to subscribe the event pageVisited to the function none-exiting-function due the error: Function "none-exiting-function" not found.]`;
+
+exports[`should fail to a remove a none-existing subscription 1`] = `[Error: Failed to unsubscribe the subscription pageVisited-none-existing-function due the error: Subscription "pageVisited-none-existing-function" not found.]`;
+
 exports[`should list the added subscriptions 1`] = `
 Object {
   "subscriptions": Array [

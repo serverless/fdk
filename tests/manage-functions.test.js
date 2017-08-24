@@ -54,9 +54,23 @@ test('should list the added function', () => {
   })
 })
 
+test('should fail to re-add the same function', () => {
+  expect.assertions(1)
+  return eventGateway.registerFunction(functionConfig).catch(err => {
+    expect(err).toMatchSnapshot()
+  })
+})
+
 test('should remove the added function', () => {
   expect.assertions(1)
   return eventGateway.deleteFunction({ functionId: 'hello' }).then(response => {
     expect(response).toBeUndefined()
+  })
+})
+
+test('should fail to remove a none-existing function', () => {
+  expect.assertions(1)
+  return eventGateway.deleteFunction({ functionId: 'missing-func' }).catch(err => {
+    expect(err).toMatchSnapshot()
   })
 })

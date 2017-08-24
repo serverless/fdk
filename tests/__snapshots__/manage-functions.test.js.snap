@@ -1,0 +1,5 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`should fail to re-add the same function 1`] = `[Error: Failed to register the function hello due the error: Function "hello" already registered.]`;
+
+exports[`should fail to remove a none-existing function 1`] = `[Error: Failed to delete the function missing-func due the error: Function "missing-func" not found.]`;
