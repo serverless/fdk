@@ -1,3 +1,3 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`should fail to create multiple misconfigured subscriptions 1`] = `[Error: Failed to configure the Event Gateway with the error: Failed to configure the Event Gateway with the error: Failed to subscribe the event userCreated to the function myFunctionTwo due the error: Function "myFunctionTwo" not found.]`;
+exports[`should fail to create multiple misconfigured subscriptions 1`] = `[Error: Failed to configure the Event Gateway. Failed to configure the Event Gateway. Failed to subscribe the event pageVisited to the function myFunctionTwo due the error: Function "myFunctionTwo" not found.]`;
