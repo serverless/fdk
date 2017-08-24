@@ -73,3 +73,12 @@ test('should fail to a add a subscription to a none existing function', () => {
     expect(err).toMatchSnapshot()
   })
 })
+
+test('should fail to a remove a none-existing subscription', () => {
+  expect.assertions(1)
+  return eventGateway
+    .unsubscribe({ subscriptionId: 'pageVisited-none-existing-function' })
+    .catch(err => {
+      expect(err).toMatchSnapshot()
+    })
+})
