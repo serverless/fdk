@@ -5,6 +5,7 @@ const commonjs = require('rollup-plugin-commonjs')
 const json = require('rollup-plugin-json')
 const uglify = require('rollup-plugin-uglify')
 const visualizer = require('rollup-plugin-visualizer')
+const sourcemaps = require('rollup-plugin-sourcemaps')
 
 // eslint-disable-next-line no-console
 console.log('Creating bundle...')
@@ -29,12 +30,14 @@ const plugins = [
   }),
   uglify(),
   visualizer(),
+  sourcemaps(),
 ]
 
 module.exports = {
   entry: 'lib/index.js',
   moduleName: 'fdk',
   exports: 'named',
+  sourceMap: true,
   targets,
   plugins,
 }
