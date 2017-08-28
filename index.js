@@ -8,7 +8,10 @@ const listSubscriptions = require('./lib/listSubscriptions')
 const configure = require('./lib/configure')
 const resetConfiguration = require('./lib/resetConfiguration')
 const emit = require('./lib/emit')
+const handler = require('./lib/handler')
 const invoke = require('./lib/invoke')
+const middleware = require('./lib/middleware')
+
 const urlUtils = require('./lib/urlUtils')
 
 const eventGateway = configuration => {
@@ -45,5 +48,6 @@ const eventGateway = configuration => {
 
 module.exports = {
   eventGateway,
-  // TODO implement and export handler
+  handler,
+  middleware
 }
