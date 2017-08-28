@@ -1,0 +1,3 @@
+{
+  "testMatch": ["**/?(*.)(browser-test).js?(x)"]
+}

@@ -1,4 +1,4 @@
-const fdk = require('../index')
+const fdk = require('../lib/index')
 const eventGatewayProcesses = require('./event-gateway/processes')
 
 const config = {

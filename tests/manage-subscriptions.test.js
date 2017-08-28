@@ -1,4 +1,4 @@
-const fdk = require('../index')
+const fdk = require('../lib/index')
 const eventGatewayProcesses = require('./event-gateway/processes')
 
 const functionConfig = {
@@ -62,5 +62,23 @@ test('should remove the added subscription', () => {
     .unsubscribe({ subscriptionId: 'pageVisited-subscription-test-function' })
     .then(response => {
       expect(response).toBeUndefined()
+    })
+})
+
+test('should fail to a add a subscription to a none existing function', () => {
+  expect.assertions(1)
+  const brokenConfig = { functionId: 'none-exiting-function', event: 'pageVisited' }
+
+  return eventGateway.subscribe(brokenConfig).catch(err => {
+    expect(err).toMatchSnapshot()
+  })
+})
+
+test('should fail to a remove a none-existing subscription', () => {
+  expect.assertions(1)
+  return eventGateway
+    .unsubscribe({ subscriptionId: 'pageVisited-none-existing-function' })
+    .catch(err => {
+      expect(err).toMatchSnapshot()
     })
 })

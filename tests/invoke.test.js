@@ -1,4 +1,4 @@
-const fdk = require('../index')
+const fdk = require('../lib/index')
 const eventGatewayProcesses = require('./event-gateway/processes')
 const http = require('http')
 
@@ -99,5 +99,17 @@ test('should invoke the function with dataType application/octet-stream', () => 
     })
     .then(data => {
       expect(data).toEqual({ message: 'success' })
+    })
+})
+
+test('should throw an error if the function does not exist', () => {
+  expect.assertions(1)
+  return eventGateway
+    .invoke({
+      functionId: 'not-existing-function',
+      data: { name: 'Austen' },
+    })
+    .catch(err => {
+      expect(err).toMatchSnapshot()
     })
 })

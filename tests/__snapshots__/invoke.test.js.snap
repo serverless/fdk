@@ -1,0 +1,6 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`should throw an error if the function does not exist 1`] = `
+[Error: Failed to invoke function not-existing-function due the error: unable to look up registered function
+]
+`;
