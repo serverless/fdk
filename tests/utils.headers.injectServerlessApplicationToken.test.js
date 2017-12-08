@@ -9,7 +9,7 @@ test('should inject the Authorization header if serverless application token is 
   const headers = {
     'Content-Type': 'application/json',
   }
-  expect(headersUtils.injectAuthorizationToken(headers)).toEqual({
+  expect(headersUtils.injectServerlessApplicationToken(headers)).toEqual({
     'Content-Type': 'application/json',
     Authorization: 'bearer wasd-1234',
   })
@@ -19,7 +19,7 @@ test('should return the same headers if serverless application token is NOT pres
   const headers = {
     'Content-Type': 'application/json',
   }
-  expect(headersUtils.injectAuthorizationToken(headers)).toEqual({
+  expect(headersUtils.injectServerlessApplicationToken(headers)).toEqual({
     'Content-Type': 'application/json',
   })
 })
