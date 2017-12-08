@@ -1,4 +1,4 @@
-const urlUtils = require('../lib/urlUtils')
+const urlUtils = require('../lib/utils/url')
 
 test('should join a url with a slash + a path with a slash', () => {
   expect(urlUtils.joinUrlWithPath('http://localhost', '/test')).toEqual('http://localhost/test')
