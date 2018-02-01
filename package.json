@@ -1,6 +1,6 @@
 {
   "name": "@serverless/fdk",
-  "version": "0.7.0",
+  "version": "0.7.1",
   "license": "MIT",
   "repository": "https://github.com/serverless/fdk",
   "main": "lib/index.js",
@@ -37,13 +37,8 @@
     "uuid": "^3.1.0"
   },
   "eslintConfig": {
-    "plugins": [
-      "node"
-    ],
-    "extends": [
-      "airbnb-base",
-      "plugin:node/recommended"
-    ],
+    "plugins": ["node"],
+    "extends": ["airbnb-base", "plugin:node/recommended"],
     "env": {
       "node": true,
       "jest": true
@@ -51,14 +46,8 @@
     "rules": {
       "strict": "off",
       "node/no-unsupported-features": "error",
-      "semi": [
-        "error",
-        "never"
-      ],
-      "arrow-parens": [
-        "error",
-        "as-needed"
-      ]
+      "semi": ["error", "never"],
+      "arrow-parens": ["error", "as-needed"]
     }
   },
   "engines": {
