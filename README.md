@@ -40,6 +40,12 @@ Optional Properties for `eventGateway`
 }
 ```
 
+To use the hosted version of Event Gateway you must set the environment variable `EVENT_GATEWAY_TOKEN` with your API key.
+
+```sh
+EVENT_GATEWAY_TOKEN=<your_api_key>
+```
+
 ## Invoke a Function
 
 ```js
