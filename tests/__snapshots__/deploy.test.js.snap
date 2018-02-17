@@ -1,0 +1,114 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`should created multiple functions and subscriptions if there are none 1`] = `
+Object {
+  "functions": Array [
+    Object {
+      "functionId": "myFunctionOne",
+      "provider": Object {
+        "arn": "https://xxxxxxxxxx.execute-api.us-east-1.amazonaws.com/dev/test",
+        "region": "us-east-1",
+        "type": "awslambda",
+      },
+    },
+    Object {
+      "functionId": "myFunctionTwo",
+      "provider": Object {
+        "type": "http",
+        "url": "http://www.example.com",
+      },
+    },
+  ],
+  "subscriptions": Array [
+    Object {
+      "event": "pageVisited",
+      "functionId": "myFunctionOne",
+      "subscriptionId": "pageVisited-myFunctionOne",
+    },
+    Object {
+      "event": "userCreated",
+      "functionId": "myFunctionOne",
+      "subscriptionId": "userCreated-myFunctionOne",
+    },
+  ],
+}
+`;
+
+exports[`step1 1`] = `
+Object {
+  "functions": Array [],
+  "subscriptions": Array [
+    Object {
+      "event": "pageVisited",
+      "functionId": "myFunctionOne",
+      "subscriptionId": "pageVisited-myFunctionOne",
+    },
+    Object {
+      "event": "userCreated",
+      "functionId": "myFunctionOne",
+      "subscriptionId": "userCreated-myFunctionOne",
+    },
+  ],
+}
+`;
+
+exports[`step1 2`] = `
+Object {
+  "functions": Array [],
+  "subscriptions": Array [
+    Object {
+      "event": "pageVisited",
+      "functionId": "myFunctionOne",
+      "subscriptionId": "pageVisited-myFunctionOne",
+    },
+    Object {
+      "event": "userCreated",
+      "functionId": "myFunctionOne",
+      "subscriptionId": "userCreated-myFunctionOne",
+    },
+  ],
+}
+`;
+
+exports[`step2 1`] = `
+Object {
+  "functions": Array [
+    Object {
+      "functionId": "myFunctionThree",
+      "provider": Object {
+        "type": "http",
+        "url": "http://www.google.com",
+      },
+    },
+  ],
+  "subscriptions": Array [
+    Object {
+      "event": "pageVisited",
+      "functionId": "myFunctionOne",
+      "subscriptionId": "pageVisited-myFunctionOne",
+    },
+    Object {
+      "event": "userCreated",
+      "functionId": "myFunctionOne",
+      "subscriptionId": "userCreated-myFunctionOne",
+    },
+    Object {
+      "event": "userDeleted",
+      "functionId": "myFunctionTwo",
+      "subscriptionId": "userDeleted-myFunctionTwo",
+    },
+    Object {
+      "event": "userUpdated",
+      "functionId": "myFunctionThree",
+      "subscriptionId": "userUpdated-myFunctionThree",
+    },
+  ],
+}
+`;
+
+exports[`step3 1`] = `
+Object {
+  "functions": Array [],
+  "subscriptions": Array [],
+}
+`;
