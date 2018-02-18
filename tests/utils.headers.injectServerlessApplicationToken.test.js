@@ -1,15 +1,15 @@
 const headersUtils = require('../lib/utils/headers')
 
 afterEach(() => {
-  delete process.env.SERVERLESS_APPLICATION_TOKEN
+  delete process.env.EVENT_GATEWAY_TOKEN
 })
 
 test('should inject the Authorization header if serverless application token is present', () => {
-  process.env.SERVERLESS_APPLICATION_TOKEN = 'wasd-1234'
+  process.env.EVENT_GATEWAY_TOKEN = 'wasd-1234'
   const headers = {
     'Content-Type': 'application/json',
   }
-  expect(headersUtils.injectServerlessApplicationToken(headers)).toEqual({
+  expect(headersUtils.injectToken(headers)).toEqual({
     'Content-Type': 'application/json',
     Authorization: 'bearer wasd-1234',
   })
@@ -19,7 +19,7 @@ test('should return the same headers if serverless application token is NOT pres
   const headers = {
     'Content-Type': 'application/json',
   }
-  expect(headersUtils.injectServerlessApplicationToken(headers)).toEqual({
+  expect(headersUtils.injectToken(headers)).toEqual({
     'Content-Type': 'application/json',
   })
 })
