@@ -1,3 +1,5 @@
+**IMPORTANT**: This library is deprecated. Please use https://github.com/serverless/event-gateway-sdk instead.
+
 # Function Development Kit (aka FDK)
 
 Node.js library to improve developer experience developing Serverless applications.
